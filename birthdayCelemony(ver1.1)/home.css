@@ -1,0 +1,816 @@
+/* 폰트 */
+
+/* 낭만있구미체 */
+@font-face {
+    font-family: 'GumiRomanceTTF';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2410-1@1.0/GumiRomanceTTF.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* 구미첨단산업체 */
+@font-face {
+    font-family: 'GumiIndustryTTF';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2410-1@1.0/GumiIndustryTTF.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* 구미돋움체 */
+@font-face {
+    font-family: 'GumiDotumTTF';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2410-1@1.0/GumiDotumTTF.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* 전체 */
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+a {
+    color: black;
+    text-decoration-line: none;
+}
+
+li {
+    list-style: none;
+}
+
+/* 이하 반응형 */
+
+/* 기본 스타일: PC용 */
+
+body {
+    margin: 0 auto;
+    font-size: 20px;
+}
+
+/* 태블릿용: 가로폭 1024px 이하 */
+@media (max-width: 1024px) {
+    body {
+        font-size: 16px;
+        width: 95%;
+        margin: 0 auto;
+    }
+}
+
+/* 모바일용: 가로폭 768px 이하 */
+@media (max-width: 768px) {
+    body {
+        font-size: 14px;
+        width: 95%;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+/* 헤더 시작 */
+
+#head {
+    background-color: #020126;
+    width: 100%;
+    height: 150px;
+    min-height: 150px;
+    position: fixed;
+    z-index: 1000;
+}
+
+.headContain {
+    width: 70%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.headLog img {
+    width: 150px;
+}
+
+.headLog img:hover {
+    content: url("./images/logo2.png");
+}
+
+.headNav ul {
+    display: flex;
+    flex-wrap: wrap;
+    /* 추가 */
+    justify-content: space-between;
+    /* 우측 정렬 */
+}
+
+.headNav li a {
+    font-family: 'GumiRomanceTTF';
+    font-size: 1.6vw;
+    color: #bbbf49;
+    margin-left: 50px;
+}
+
+.headNav li a:hover {
+    color: #edf252;
+}
+
+.headNav li a:active {
+    font-size: 150%;
+}
+
+/* 헤더 반응형 */
+
+@media (max-width: 1024px) {
+    #head {
+        width: 95%;
+        margin: 0 auto;
+    }
+
+    .headNav li {
+        margin-left: 20px;
+    }
+
+    .headNav {
+        width: 95%;
+        margin: 0 auto;
+    }
+
+    .headNav ul {
+        margin-left: 20px;
+
+    }
+
+    .headNav li a {
+        font-size: 14px;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 768px) {
+    #head {
+        height: 120px;
+        margin: 0 auto;
+    }
+
+    .headContain {
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .headNav li {
+        margin-left: 20px;
+    }
+
+    .headNav {
+        width: 100%;
+
+    }
+
+    .headNav ul {
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .headNav li a {
+        font-size: 14px;
+        margin: 0 auto;
+    }
+
+    .headLog img {
+        width: 70px;
+    }
+}
+
+/* 헤더 종료 */
+
+/* 히어로섹션 시작 */
+#hero {
+    padding-top: 150px;
+    background-color: #EDF252;
+}
+
+.heroImg {
+    text-align: center;
+    padding-top: 50px;
+}
+
+.heroImg img {
+    width: 50%;
+    max-width: 480px;
+}
+
+.heroImg img:hover {
+    content: url(./images/heroImgHover.png);
+}
+
+.heroTitle p {
+    text-align: center;
+    font-size: 60px;
+    font-family: 'GumiRomanceTTF';
+    color: #020126;
+    word-break: keep-all;
+    padding: 5% 20px;
+}
+
+/* 히어로섹션 반응형*/
+
+/* 태블릿 */
+@media (max-width: 1024px) {
+    .heroTitle p {
+        font-size: 50px;
+    }
+
+    .heroImg img {
+        width: 60%;
+    }
+}
+
+/* 모바일 */
+@media (max-width: 768px) {
+    .heroTitle p {
+        font-size: 40px;
+    }
+
+    .heroImg img {
+        width: 80%;
+    }
+}
+
+/* 히어로섹션 끝 */
+
+/* 본문 컨테이너 */
+#container {
+    width: 100%;
+    background-color: #bbbf49;
+}
+
+
+/* 본문 콘텐츠 시작 */
+#main {
+    max-width: 1280px;
+    width: 90%;
+    margin: 0 auto;
+    padding: 5%;
+    background-color: white;
+    border: 3px solid #edf252;
+}
+
+.blank {
+    min-height: 120px;
+}
+
+.mainAbout {
+    margin-top: 50px;
+    text-align: center;
+}
+
+.mainTitle {
+    margin-bottom: 50px;
+    font-family: 'GumiIndustryTTF';
+    font-size: 200%;
+    color: #0D0D0D;
+    position: relative;
+    text-align: center;
+}
+
+.mainTitle::after {
+    content: "";
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 35%;
+    /* 고정 길이 */
+    height: 3px;
+    background-color: #bbbf49;
+    /* 청록색 */
+}
+
+.mainText {
+    font-family: 'GumiDotumTTF';
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    color: #0D0D0D;
+}
+
+.mainText li {
+    font-size: 18px;
+}
+
+.subText {
+    font-family: 'GumiDotumTTF';
+    font-size: clamp(0.5rem, 2vw, 1rem);
+    color: #737373;
+}
+
+/* 본문 특파원소개 시작 */
+
+.aboutBox {
+    background-color: #edf252;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid #BBBF49;
+    box-shadow: 0 8px 16px #737373;
+    border-radius: 10px;
+    min-height: 200px;
+    margin: 100px 0;
+    padding: 50px 0;
+}
+
+.aboutBox:hover {
+    background-color: #BBBF49;
+}
+
+.aboutImg {
+    width: 50%;
+    text-align: center;
+}
+
+.aboutImg img {
+    width: 90%;
+    border-radius: 10px;
+}
+
+.aboutText {
+    width: 35%;
+}
+
+.aboutText ul {
+    text-align: center;
+}
+
+/* 특파원 소개 상세 페이지 시작*/
+
+
+.aboutBoxJS {
+    margin: 0;
+    height: 50vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.aboutFloatDiv {
+    position: absolute;
+    width: 100vw;
+    height: 100vw;
+}
+
+.aboutFloatBox {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px 30px;
+    font-family: 'GumiRomanceTTF';
+    background-color: #edf252;
+    border: 2px solid #020126;
+    color: #0D0D0D;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    font-size: clamp(0.5rem, 2.5vw, 1.8rem);
+    transition: transform 0.1s ease-out;
+    pointer-events: none;
+    /* 박스 위에서 커서 막히지 않게 */
+}
+
+/* 특파원 소개 상세 페이지 끝 */
+
+
+.mainrows {
+    display: flex;
+    justify-content: center;
+}
+
+.mainBtn {
+    font-size: 20px;
+    color: #edf252;
+    background-color: #020126;
+    border: 0;
+    width: 200px;
+    height: 60px;
+    border-radius: 5px;
+    box-shadow: 0 8px 16px #737373;
+    margin-bottom: 100px;
+}
+
+.mainBtn:hover {
+    font-weight: bold;
+    color: #0D0D0D;
+    background-color: #bbbf49;
+    border: 2px solid #737373;
+}
+
+.mainBtn:active {
+    background-color: #EDF252;
+}
+
+/* 본문 반응형 */
+
+@media (max-width: 1024px) {
+
+    .mainTitle {
+        margin-bottom: 30px;
+        font-family: 'GumiIndustryTTF';
+        font-size: 200%;
+        color: #0D0D0D;
+        position: relative;
+        text-align: center;
+    }
+
+    .aboutBox {
+        height: auto;
+        padding: 10% 0;
+    }
+
+    .aboutBox img {
+        padding: 10% 0;
+    }
+
+    .mainText {
+        font-family: 'GumiDotumTTF';
+        font-size: 85%;
+        color: #0D0D0D;
+    }
+
+    .mainText li {
+        font-family: 'GumiDotumTTF';
+        font-size: 100%;
+        color: #0D0D0D;
+    }
+
+    .newsContain {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 768px) {
+    .aboutBox {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .aboutImg,
+    .aboutText {
+        width: 100%;
+        text-align: center;
+    }
+
+    .aboutImg img {
+        width: 80%;
+        max-width: 300px;
+    }
+
+    .mainTitle::after {
+        width: 100%;
+        /* 고정 길이 제거 */
+        max-width: 300px;
+    }
+
+    .mainText {
+        font-family: 'GumiDotumTTF';
+        font-size: clamp(1rem, 2vw, 3rem);
+        color: #0D0D0D;
+        text-align: center;
+        word-break: normal;
+        white-space: normal;
+        overflow-wrap: break-word;
+    }
+
+    .subText {
+        font-family: 'GumiDotumTTF';
+        font-size: clamp(0.5rem, 2vw, 2.5rem);
+        color: #737373;
+        text-align: center;
+        word-break: normal;
+        white-space: normal;
+        overflow-wrap: break-word;
+    }
+}
+
+/* 특파원소개 종료 */
+
+/* 뉴스 시작 */
+.news {
+    text-align: center;
+}
+
+.newsBox {
+    background-color: #edf252;
+    border: 3px solid #BBBF49;
+    box-shadow: 0 8px 16px #737373;
+    border-radius: 10px;
+    width: 100%;
+    margin: 100px 0;
+}
+
+
+.newsCols {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    margin-bottom: 10px;
+}
+
+.newsThumb {
+    padding-top: 20px;
+    width: 100%;
+}
+
+.newsThumb:hover {
+    background-color: #BBBF49;
+    border-radius: 20px;
+}
+
+.newsThumb .mainText,
+.newsThumb .subText {
+    width: 100%;
+    padding: 0 15px;
+    text-align: left;
+    gap: 10px;
+}
+
+.newsColsImg img {
+    width: 80%;
+    min-width: 10vw;
+    border-radius: 10px;
+}
+
+.newsContain {
+    display: flex;
+}
+
+.newsContain .newsColsImg img {
+    min-width: 20vw;
+}
+
+.newsTextBox {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.newsTextBox .mainText,
+.newsTextBox .subText {
+    display: inline-block !important;
+}
+
+/* 양배추 인형 깜짝쇼 */
+
+.dollHover:hover {
+    content: url(./images/doll3.webp);
+}
+
+.dollHover:active {
+    content: url(./images/doll2.webp);
+}
+
+/* 양배추 인형 깜짝쇼 끝 */
+
+/* 팬레터 시작*/
+
+.fan {
+    text-align: center;
+}
+
+.fanImg img {
+    margin: 100px 0;
+    border-radius: 10px;
+    width: 100%;
+    transition: filter 0.3s ease;
+    /* 부드러운 전환 */
+    filter: brightness(100%);
+}
+
+.fanImg img:hover {
+    filter: brightness(70%);
+    /* hover 시 약간 어둡게 = 진하게 */
+}
+
+.fanText {
+    text-align: left;
+    font-family: 'GumiDotumTTF';
+    font-size: clamp(0.8rem, 3vw, 1.8rem);
+    color: #0D0D0D;
+    line-height: 1.6;
+    /* 줄 간격 조절 */
+    background-image: repeating-linear-gradient(to bottom,
+            transparent,
+            transparent calc(1.6em - 2px),
+            #edf252 calc(1.6em - 2px),
+            #edf252 1.6em);
+    background-size: 100% 1.6em;
+    background-position-y: 1em;
+    /* 선을 약간 아래로 내리기 */
+    padding: 1em;
+}
+
+.fanDear {
+    margin: 3vw 0;
+    font-family: 'GumiRomanceTTF';
+    font-size: clamp(0.5rem, 2.5vw, 1.8rem);
+    color: #0D0D0D;
+}
+
+
+
+/* 팬레터 종료 */
+
+/* 푸룬레터 시작*/
+
+.purun {
+    text-align: center;
+}
+
+.purunImg img {
+    margin: 100px 0;
+    border-radius: 10px;
+    width: 100%;
+    transition: filter 0.3s ease;
+    /* 부드러운 전환 */
+    filter: brightness(100%);
+}
+
+.purunImg img:hover {
+    filter: brightness(70%);
+    /* hover 시 약간 어둡게 = 진하게 */
+}
+
+/* 푸룬레터 종료
+
+
+/* 푸터 시작 */
+
+#foot {
+    background-color: #020126;
+    width: 100%;
+    height: auto;
+}
+
+.footContain {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    /* 줄바꿈 허용 */
+    text-align: center;
+    max-width: 1280px;
+    height: 300px;
+    margin: 0 auto;
+}
+
+.footCopy,
+.footSince {
+    font-family: 'GumiRomanceTTF';
+    font-size: 30px;
+    color: #bbbf49;
+}
+
+/* 푸터 종료 */
+
+/* 푸터 반응형*/
+
+@media (max-width: 1024px) {
+    #foot {
+        flex-direction: column;
+        height: auto;
+        width: 100%;
+        padding: 40px 0;
+    }
+
+    .footContain {
+        height: auto;
+    }
+
+    .footCopy,
+    .footSince {
+        font-size: 24px;
+        margin: 10px 0;
+    }
+}
+
+
+/* 모바일용: 가로폭 768px 이하 */
+@media (max-width: 768px) {
+    #foot {
+        flex-direction: column;
+        height: auto;
+        padding: 30px 0;
+    }
+
+    .footContain {
+        height: auto;
+    }
+
+    .footCopy,
+    .footSince {
+        font-size: 18px;
+        margin: 10px 0;
+        line-height: 1.4;
+    }
+}
+
+/* 푸터 종료 */
+
+/* 초소형 모바일 반응형 : 480px 이하 */
+
+@media (max-width: 480px) {
+    .heroTitle p {
+        font-size: 28px;
+    }
+
+    .mainTitle {
+        font-size: 130%;
+    }
+
+    .mainText {
+        font-size: 80%;
+    }
+
+    .mainBtn {
+        width: 70%;
+    }
+
+    .newsTextBox .mainText {
+        margin-top: 20vmin;
+        padding-top: 30vmin;
+    }
+
+    .newsThumb .mainText {
+        display: none;
+    }
+
+    .subText {
+        display: none;
+    }
+
+    .newsBox {
+        height: 100%;
+    }
+
+    .newsCols {
+        margin-top: -5px;
+        padding: 0;
+    }
+
+    .newsColsImg {
+        height: 10%;
+        min-width: 10vw;
+    }
+
+    .newsColsImg img {
+        width: 90%;
+    }
+
+    .headNav ul {
+        text-align: center;
+        margin: 0 auto;
+    }
+
+    .headNav li {
+        margin: 0 auto;
+    }
+
+    .headNav li a {
+        font-size: 50%;
+        margin: 0 3px;
+    }
+
+    .newsThumb .mainText {
+        font-size: 14px;
+    }
+
+    .newsThumb .subText {
+        font-size: 12px;
+    }
+
+    .footCopy,
+    .footSince {
+        font-size: 16px;
+    }
+}
+
+/* 초초소형 반응형*/
+
+@media (max-width: 300px) {
+    .mainText li {
+        display: none;
+    }
+
+    .aboutBox {
+        max-height: 100px;
+        padding: 10vw;
+        padding-top: 15vw;
+    }
+}
