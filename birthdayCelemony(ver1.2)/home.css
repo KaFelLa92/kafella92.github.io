@@ -575,7 +575,7 @@ body {
 
 .newsColsImg img {
     width: 80%;
-    min-width: 10vw;
+    min-width: 1vw;
     border-radius: 10px;
 }
 
