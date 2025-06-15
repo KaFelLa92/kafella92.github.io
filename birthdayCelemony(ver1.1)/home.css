@@ -360,17 +360,22 @@ body {
 
 .tree-bg {
     width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 4;
+    /* 나무 이미지 비율 맞춰서 */
+    object-fit: contain;
     display: block;
 }
 
 .flower-box {
     position: absolute;
+    cursor: pointer;
     text-align: center;
     transform: translate(-50%, -50%)
 }
 
 .flower {
-    width: 4vh;
+    width: 3.5vh;
     cursor: pointer;
 }
 
@@ -378,19 +383,38 @@ body {
     display: none;
     position: absolute;
     top: -20px;
-    right: -50px;
+    right: -60px;
     background-color: #EDF252;
     border: 2px solid #737373;
     border-radius: 5px;
     padding: 6px 10px;
     white-space: nowrap;
     font-weight: bold;
+    font-size: 1.2rem;
     z-index: 10;
-    
+
 }
 
 .flower-box:hover .label {
     display: block;
+    position: absolute;
+}
+
+@media (max-width: 1024px) {
+
+    .flower {
+        height: 2%;
+    }
+
+    .label {
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .flower-box {
+        font-size: 8px;
+    }
 }
 
 
