@@ -373,9 +373,14 @@ body {
     transform: translate(-50%, -50%)
 }
 
+.flower-box img {
+    z-index: 1
+}
+
 .flower {
     width: 3.5vh;
     cursor: pointer;
+    z-index: 1
 }
 
 .label {
@@ -391,12 +396,12 @@ body {
     font-weight: bold;
     font-size: 1.2rem;
     z-index: 10;
-
 }
 
 .flower-box:hover .label {
     display: block;
     position: absolute;
+    z-index: 100;
 }
 
 @media (max-width: 1024px) {
