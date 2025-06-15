@@ -265,7 +265,7 @@ body {
 }
 
 .blank {
-    min-height: 120px;
+    height: 100px;
 }
 
 .mainAbout {
