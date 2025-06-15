@@ -71,8 +71,8 @@ body {
     }
 
     .headNav li a:active {
-    font-size: 120%;
-}
+        font-size: 120%;
+    }
 }
 
 /* 헤더 시작 */
@@ -359,6 +359,7 @@ body {
     max-width: 700px;
     height: auto;
     margin: 0 auto;
+    z-index: 0;
 }
 
 .tree-bg {
@@ -368,23 +369,27 @@ body {
     /* 나무 이미지 비율 맞춰서 */
     object-fit: contain;
     display: block;
+    z-index: 0;
 }
 
 .flower-box {
     position: absolute;
     cursor: pointer;
+    z-index: 1;
     text-align: center;
     transform: translate(-50%, -50%)
 }
 
 .flower-box img {
-    z-index: 1
+    z-index: 1;
+    position: relative;
 }
 
 .flower {
     width: 3.5vh;
     cursor: pointer;
-    z-index: 1
+    z-index: 1;
+    position: relative;
 }
 
 .label {
@@ -399,7 +404,7 @@ body {
     white-space: nowrap;
     font-weight: bold;
     font-size: 1.2rem;
-    z-index: 10;
+    z-index: auto;
 }
 
 .flower-box:hover .label {
