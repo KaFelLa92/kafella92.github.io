@@ -679,6 +679,43 @@ body {
     text-align: center;
 }
 
+.purunContain {
+    background-color: #edf252;
+    border: 3px solid #BBBF49;
+    box-shadow: 0 8px 16px #737373;
+    border-radius: 10px;
+    width: 100%;
+
+    padding: 2vh;
+}
+
+.purunBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2vh;
+}
+
+.purunLeft {
+    width: 30%;
+}
+
+.purunLeft img {
+    width: 100%;
+    max-height: 100%;
+    border-radius: 10px;
+    border: 3px solid #020126;
+}
+
+.purunRight {
+    width: 70%;
+}
+
+.purunText{
+    color: #020126;
+    font-weight: bold;
+}
+
 .purunImg img {
     margin: 100px 0;
     border-radius: 10px;
