@@ -1,4 +1,4 @@
-const correctPassword = ""; // 원하는 비밀번호로 수정
+const correctPassword = "19930623"; // 원하는 비밀번호로 수정
 
 let input = prompt("💬 푸룬토크는 연인만 입장 가능합니다.\n비밀번호를 입력해주세요:");
 
