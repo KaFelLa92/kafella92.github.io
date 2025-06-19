@@ -1,54 +1,71 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
-    <meta charset='utf-8'>
-    <title> mind_test </title>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+  <meta charset="UTF-8">
+  <title>선물 유형 심리테스트</title>
+  <style>
+    body { font-family: 'Arial', sans-serif; background: #f0f0f0; text-align: center; padding: 40px; }
+    .container { background: white; padding: 20px; max-width: 500px; margin: auto; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);}
+    .question { font-size: 20px; margin-bottom: 20px; }
+    .answer-btn { display: block; margin: 10px auto; padding: 10px 20px; font-size: 16px; cursor: pointer; }
+    #result { display: none; font-size: 24px; margin-top: 20px; }
+  </style>
 </head>
 <body>
-    
-    <!-- index.html -->
-<div id="quiz">
-  <div id="question">질문이 여기에 나와요</div>
-  <button onclick="answer(1)">선택지 1</button>
-  <button onclick="answer(2)">선택지 2</button>
-</div>
 
-<div id="result" style="display:none;">
-  <p id="resultText"></p>
+<div class="container">
+  <h1>🎁 선물 심리테스트</h1>
+  <div id="quiz">
+    <div class="question" id="question">질문이 여기에 나옵니다</div>
+    <button class="answer-btn" onclick="choose(1)">선택지 1</button>
+    <button class="answer-btn" onclick="choose(0)">선택지 2</button>
+  </div>
+  <div id="result"></div>
 </div>
 
 <script>
   const questions = [
-    { q: "당신은 새로운 사람을 만날 때?", a1: "기대돼!", a2: "좀 부담돼", score: [1, 0] },
-    { q: "혼자 보내는 시간이?", a1: "힐링이다", a2: "심심해", score: [1, 0] },
-    // 더 추가 가능
+    { q: "상대방은 계획적인 편인가요?", a1: "네, 꼼꼼해요", a2: "아니요, 자유로워요" },
+    { q: "상대방은 감성적인 스타일인가요?", a1: "네, 감수성이 풍부해요", a2: "아니요, 현실적이에요" },
+    { q: "선물을 고를 때 가장 중요하게 생각하는 건?", a1: "마음이 담긴 것", a2: "실용성!" }
   ];
 
-  let index = 0;
-  let totalScore = 0;
+  let current = 0;
+  let score = 0;
 
-  function answer(choice) {
-    totalScore += questions[index].score[choice - 1];
-    index++;
+  const questionEl = document.getElementById('question');
+  const btns = document.querySelectorAll('.answer-btn');
+  const resultEl = document.getElementById('result');
 
-    if (index < questions.length) {
-      document.getElementById("question").innerText = questions[index].q;
-      document.querySelectorAll("button")[0].innerText = questions[index].a1;
-      document.querySelectorAll("button")[1].innerText = questions[index].a2;
+  function showQuestion() {
+    if (current < questions.length) {
+      questionEl.innerText = questions[current].q;
+      btns[0].innerText = questions[current].a1;
+      btns[1].innerText = questions[current].a2;
     } else {
-      document.getElementById("quiz").style.display = "none";
-      document.getElementById("result").style.display = "block";
-      document.getElementById("resultText").innerText = totalScore >= 2 ? "내향형!" : "외향형!";
+      showResult();
     }
   }
 
-  // 초기 질문 세팅
-  document.getElementById("question").innerText = questions[0].q;
-  document.querySelectorAll("button")[0].innerText = questions[0].a1;
-  document.querySelectorAll("button")[1].innerText = questions[0].a2;
-</script>
+  function choose(point) {
+    score += point;
+    current++;
+    showQuestion();
+  }
 
+  function showResult() {
+    document.getElementById('quiz').style.display = 'none';
+    resultEl.style.display = 'block';
+
+    let resultText = (score >= 2)
+      ? "✨ 감성적인 선물 추천: 꽃다발, 손편지, 캔들"
+      : "🔧 실용적인 선물 추천: 보조배터리, 텀블러, 다이어리";
+
+    resultEl.innerText = resultText;
+  }
+
+  showQuestion();
+</script>
 
 </body>
 </html>
