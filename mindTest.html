@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <title> mind_test </title>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+</head>
+<body>
+    
+    <!-- index.html -->
+<div id="quiz">
+  <div id="question">질문이 여기에 나와요</div>
+  <button onclick="answer(1)">선택지 1</button>
+  <button onclick="answer(2)">선택지 2</button>
+</div>
+
+<div id="result" style="display:none;">
+  <p id="resultText"></p>
+</div>
+
+<script>
+  const questions = [
+    { q: "당신은 새로운 사람을 만날 때?", a1: "기대돼!", a2: "좀 부담돼", score: [1, 0] },
+    { q: "혼자 보내는 시간이?", a1: "힐링이다", a2: "심심해", score: [1, 0] },
+    // 더 추가 가능
+  ];
+
+  let index = 0;
+  let totalScore = 0;
+
+  function answer(choice) {
+    totalScore += questions[index].score[choice - 1];
+    index++;
+
+    if (index < questions.length) {
+      document.getElementById("question").innerText = questions[index].q;
+      document.querySelectorAll("button")[0].innerText = questions[index].a1;
+      document.querySelectorAll("button")[1].innerText = questions[index].a2;
+    } else {
+      document.getElementById("quiz").style.display = "none";
+      document.getElementById("result").style.display = "block";
+      document.getElementById("resultText").innerText = totalScore >= 2 ? "내향형!" : "외향형!";
+    }
+  }
+
+  // 초기 질문 세팅
+  document.getElementById("question").innerText = questions[0].q;
+  document.querySelectorAll("button")[0].innerText = questions[0].a1;
+  document.querySelectorAll("button")[1].innerText = questions[0].a2;
+</script>
+
+
+</body>
+</html>
