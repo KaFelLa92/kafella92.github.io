@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <title>Page Title</title>
+</head>
+
+<body>
+
+    <h1> 실습13 : 미니 전화번호부 </h1>
+    <div>
+        <h3> 연락처 등록 영역 </h3>
+        이름입력 : <input id="nameInput" type="text" placeholder="이름을 입력하세요." /> <br />
+        전화번호 : <input id="numInput" type="text" placeholder="전화번호 입력 (-없이) " /> <br />
+        메모입력 : <input id="memoInput" type="text" placeholder="추가 정보를 남기세요." /> <br />
+        <button onclick="addCallNum()"> 등록 </button>
+
+    </div>
+    <h3> 연락처 목록 영역 </h3>
+    <table border="1">
+        <thead>
+            <tr>
+                <th> 이름 </th>
+                <th> 전화번호 </th>
+                <th> 메모 </th>
+            </tr>
+        </thead>
+        <tbody id="numberBody">
+            <tr>
+                <td> 김말숙 </td>
+                <td> 010-1234-5678 </td>
+                <td> 미용실원장 </td>
+            </tr>
+            <tr>
+                <td> 박말녀 </td>
+                <td> 010-2201-5432 </td>
+                <td> 대지주 </td>
+            </tr>
+            <tr>
+                <td> 오로성 </td>
+                <td> 010-4237-8663 </td>
+                <td> 인파이터 </td>
+            </tr>
+        </tbody>
+    </table>
+    <div>
+
+
+
+    </div>
+
+    <script src='실습13.js'></script>
+</body>
+
+</html>
