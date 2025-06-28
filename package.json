@@ -1,0 +1,24 @@
+{
+  "name": "kafella92.github.io",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KaFelLa92/kafella92.github.io.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KaFelLa92/kafella92.github.io/issues"
+  },
+  "homepage": "https://github.com/KaFelLa92/kafella92.github.io#readme",
+  "dependencies": {
+    "express": "^5.1.0",
+    "path": "^0.12.7",
+    "serve-static": "^2.2.0"
+  }
+}
