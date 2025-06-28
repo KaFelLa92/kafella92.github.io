@@ -1,4 +1,4 @@
-// node.js로 서버 생성하는 JS입니다.
+// node.js로 서버 생성하는 JS 코드입니다.
 
 const express = require('express');
 const path = require('path');
