@@ -1,5 +1,5 @@
-function Greeting() { // 간단한 함수형 컴포넌트
-  return <h1> 안녕하세요, 반갑습니다. </h1>;
+function Greeting(props) { // 간단한 함수형 컴포넌트
+  return <h1> 안녕하세요, {props.name}님! </h1>;
 }
 
 // 복잡한 예시
