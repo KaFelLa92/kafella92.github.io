@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "my-app",
-    "slug": "my-app",
+    "name": "saykorean_phone",
+    "slug": "saykorean_phone",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "myapp",
+    "scheme": "saykoreanphone",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
