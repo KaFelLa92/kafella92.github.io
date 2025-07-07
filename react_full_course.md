@@ -24,7 +24,7 @@ export default Welcome;
 // src/App.js
 import Welcome from './components/Welcome';
 
-function App() {
+function App() {  
   return (
     <div>
       <Welcome name="최동진" />

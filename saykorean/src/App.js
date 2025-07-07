@@ -1,27 +1,21 @@
-import { Routes, Route, Link } from 'react-router-dom';
-import HomePage from './pages/HomePage';
-import PostListPage from './pages/PostListPage';
-import NewPostPage from './pages/NewPostPage';
 import './App.css';
+import Welcome from './components/Welcome';
+import MyProfile from './components/MyProfile';
+import Book from './components/Book';
+import Product from './components/Product';
 
 function App() {
   return (
     <div>
-      <nav className="head-nav">
-        <Link to="/" style={{color: 'white', marginRight: '20px'}}>Home</Link>
-        <Link to="/posts" style={{color: 'white', marginRight: '20px'}}>글 목록</Link>
-        <Link to="/new-post" style={{color: 'white'}}>새 글 작성</Link>
-      </nav>
-
-      <div style={{padding: '20px'}}>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/posts" element={<PostListPage />} />
-          <Route path="/new-post" element={<NewPostPage />} />
-        </Routes>
-      </div>
+      <Welcome name="최동진" />
+      <Welcome name="Gemini" />
+      <MyProfile />
+      <Book title="연금술사" author="paul cojelo" />
+      <Book title="강철의 연금술사" author="arakawa hiromu" />
+      <Product name="정동진쌀 10kg" price="21,000" />
     </div>
   );
 }
+
 
 export default App;
