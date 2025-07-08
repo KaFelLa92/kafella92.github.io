@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+// 1초마다 1씩증가
+// use
 
 function Timer() {
     // useState로 숫자 변환
