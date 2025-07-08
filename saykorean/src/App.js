@@ -4,6 +4,8 @@ import MyProfile from './components/MyProfile';
 import Book from './components/Book';
 import Product from './components/Product';
 import Counter from './components/Counter';
+import Timer from './components/Timer';
+
 function App() {
 
   return (
@@ -16,7 +18,7 @@ function App() {
       <Book title="강철의 연금술사" author="arakawa hiromu" />
       <Product name="정동진쌀 10kg" price="21,000" />
       <Counter></Counter>
-
+      <Timer></Timer>
     </div >
   );
 }

@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>선물 유형 심리테스트</title>
+  <title>Gift Type Psychology Test</title>
   <style>
     body { font-family: 'Arial', sans-serif; background: #f0f0f0; text-align: center; padding: 40px; }
     .container { background: white; padding: 20px; max-width: 500px; margin: auto; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);}
@@ -14,20 +14,20 @@
 <body>
 
 <div class="container">
-  <h1>🎁 선물 심리테스트</h1>
+  <h1>🎁 Gift Psychology Test</h1>
   <div id="quiz">
-    <div class="question" id="question">질문이 여기에 나옵니다</div>
-    <button class="answer-btn" onclick="choose(1)">선택지 1</button>
-    <button class="answer-btn" onclick="choose(0)">선택지 2</button>
+    <div class="question" id="question">The question will appear here.</div>
+    <button class="answer-btn" onclick="choose(1)">Answer 1</button>
+    <button class="answer-btn" onclick="choose(0)">Answer 2</button>
   </div>
   <div id="result"></div>
 </div>
 
 <script>
   const questions = [
-    { q: "상대방은 계획적인 편인가요?", a1: "네, 꼼꼼해요", a2: "아니요, 자유로워요" },
-    { q: "상대방은 감성적인 스타일인가요?", a1: "네, 감수성이 풍부해요", a2: "아니요, 현실적이에요" },
-    { q: "선물을 고를 때 가장 중요하게 생각하는 건?", a1: "마음이 담긴 것", a2: "실용성!" }
+    { q: "Is the person a planner?", a1: "Yes, very meticulous", a2: "No, more free-spirited" },
+    { q: "Are they the emotional type?", a1: "Yes, very sensitive", a2: "No, very practical" },
+    { q: "What's most important when choosing a gift?", a1: "The thought behind it", a2: "Practicality!" }
   ];
 
   let current = 0;
@@ -58,8 +58,8 @@
     resultEl.style.display = 'block';
 
     let resultText = (score >= 2)
-      ? "✨ 감성적인 선물 추천: 꽃다발, 손편지, 캔들"
-      : "🔧 실용적인 선물 추천: 보조배터리, 텀블러, 다이어리";
+      ? "✨ Recommended Emotional Gifts: Bouquet, Handwritten Letter, Candle"
+      : "🔧 Recommended Practical Gifts: Power Bank, Tumbler, Diary";
 
     resultEl.innerText = resultText;
   }
