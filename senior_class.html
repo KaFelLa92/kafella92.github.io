@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>시니어 원데이 클래스 신청</title>
+    <style>
+        body {
+            font-family: 'Malgun Gothic', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            color: #0056b3;
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        h2 {
+            margin-top: 40px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #0056b3;
+            padding-bottom: 10px;
+        }
+        .class-list {
+            list-style: none;
+            padding: 0;
+        }
+        .class-list li {
+            background: #e9ecef;
+            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 5px;
+            font-size: 1.1em;
+        }
+        form {
+            margin-top: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #0056b3;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .submit-btn:hover {
+            background-color: #004494;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>&#127881; 시니어 활력 충전! 원데이 클래스 &#127881;</h1>
+        <p style="text-align: center; font-size: 1.1em;">새로운 취미를 찾고, 즐거운 하루를 보내세요! 어르신들을 위한 특별한 원데이 클래스에 초대합니다.</p>
+
+        <h2>&#127912; 오늘의 클래스</h2>
+        <ul class="class-list">
+            <li><strong>스마트폰 사진 교실:</strong> 일상을 예술로 만드는 사진 촬영법 배우기</li>
+            <li><strong>감성 수채화:</strong> 아름다운 꽃과 풍경을 물감으로 그려보기</li>
+            <li><strong>몸이 편안한 요가:</strong> 의자에 앉아서 하는 쉽고 안전한 요가</li>
+        </ul>
+
+        <h2>&#✍️ 참가 신청하기</h2>
+        <form onsubmit="alert('신청이 완료되었습니다!'); return false;">
+            <div class="form-group">
+                <label for="name">성함</label>
+                <input type="text" id="name" name="name" placeholder="성함을 입력해주세요" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">연락처</label>
+                <input type="tel" id="phone" name="phone" placeholder="'-' 없이 숫자만 입력해주세요" required>
+            </div>
+            <div class="form-group">
+                <label for="class-select">신청할 클래스 선택</label>
+                <select id="class-select" name="class-select" required>
+                    <option value="">-- 클래스를 선택하세요 --</option>
+                    <option value="photo">스마트폰 사진 교실</option>
+                    <option value="watercolor">감성 수채화</option>
+                    <option value="yoga">몸이 편안한 요가</option>
+                </select>
+            </div>
+            <button type="submit" class="submit-btn">신청하기</button>
+        </form>
+    </div>
+
+</body>
+</html>
