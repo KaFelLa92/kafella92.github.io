@@ -9,11 +9,11 @@ function stopWatch(){
 
     useEffect( () => {
         const intervalId = setInterval(() => {
-            
-        }
-
-        )
+            setSeconds(prevSeconds => prevSeconds + 1);
+        } ,1000 );
     }
+    
+    //
 
     )
 
