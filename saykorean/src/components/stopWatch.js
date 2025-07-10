@@ -8,8 +8,12 @@ function stopWatch(){
     const [seconds , setSeconds] = useState(0);
 
     useEffect( () => {
-        const
+        const intervalId = setInterval(() => {
+            setSeconds(prevSeconds => prevSeconds + 1);
+        } ,1000 );
     }
+    
+    //
 
     )
 
