@@ -21,7 +21,7 @@ function App() {
       <Counter></Counter>
       <Timer></Timer>
       <Stopwatch></Stopwatch>
-    </div >
+    </div>
   );
 }
 
