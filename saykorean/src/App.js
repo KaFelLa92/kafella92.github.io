@@ -5,7 +5,7 @@ import Book from './components/Book';
 import Product from './components/Product';
 import Counter from './components/Counter';
 import Timer from './components/Timer';
-import Stopwatch from './components/Stopwatch';
+import Stopwatch from './components/stopWatch';
 
 function App() {
 
@@ -21,7 +21,7 @@ function App() {
       <Counter></Counter>
       <Timer></Timer>
       <Stopwatch></Stopwatch>
-    </div>
+    </div >
   );
 }
 
