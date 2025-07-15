@@ -7,7 +7,7 @@ import Counter from './components/Counter';
 import Timer from './components/Timer';
 import Stopwatch from './components/Stopwatch';
 import Tictok from './components/Tictok';
-import RandomNumber from './components/RandomNumber';
+import RandomNumber from './components/RandomNumber.js';
 
 function App() {
 
