@@ -15,11 +15,11 @@ import Greeting from './components/Greeting.js';
 import { useState } from 'react';
 import LoginButton from './components/LoginButton.js';
 import LogoutButton from './components/LogoutButton.js';
+import DataLoader from './components/DataLoader.js';
+
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-
   const handleLogin = () => setIsLoggedIn(true);
   const handleLogout = () => setIsLoggedIn(false);
 
@@ -38,6 +38,7 @@ function App() {
       <Tictok></Tictok>
       <RandomNumber />
       <WatchCounter />
+      <DataLoader />
     </div >
   );
 }
