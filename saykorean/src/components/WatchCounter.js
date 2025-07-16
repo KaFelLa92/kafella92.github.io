@@ -4,8 +4,8 @@ function WatchCounter() {
 
     const [count, setCount] = useState(0);
     useEffect(() => {
-        console.log(count)
-    }, []);
+        console.log('카운트가 ' + count + "(으)로 변경되었습니다.")
+    }, [count]);
 
     return (
         <div>

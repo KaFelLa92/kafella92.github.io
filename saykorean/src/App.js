@@ -9,6 +9,8 @@ import Stopwatch from './components/Stopwatch.js';
 import Tictok from './components/Tictok';
 import RandomNumber from './components/RandomNumber.js';
 import WatchCounter from './components/WatchCounter.js';
+import AlertButton from './components/AlertButton.js';
+
 
 
 function App() {
@@ -28,6 +30,7 @@ function App() {
       <Tictok></Tictok>
       <RandomNumber />
       <WatchCounter />
+      <AlertButton> 여기 클릭 </AlertButton>
     </div >
   );
 }
