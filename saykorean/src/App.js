@@ -10,10 +10,18 @@ import Tictok from './components/Tictok';
 import RandomNumber from './components/RandomNumber.js';
 import WatchCounter from './components/WatchCounter.js';
 import AlertButton from './components/AlertButton.js';
-
-
+import ToggleButton from './components/ToggleButton.js';
+import Greeting from './components/Greeting.js';
+import { useState } from 'react';
+import LoginButton from './components/LoginButton.js';
+import LogoutButton from './components/LogoutButton.js';
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+
+  const handleLogin = () => setIsLoggedIn(true);
+  const handleLogout = () => setIsLoggedIn(false);
 
   return (
 
@@ -30,7 +38,6 @@ function App() {
       <Tictok></Tictok>
       <RandomNumber />
       <WatchCounter />
-      <AlertButton> 여기 클릭 </AlertButton>
     </div >
   );
 }
