@@ -15,6 +15,8 @@ import Greeting from './components/Greeting.js';
 import { useState } from 'react';
 import DataLoader from './components/DataLoader.js';
 import Mapping from './components/Mapping.js';
+import FruitList from './components/FruitList.js';
+
 
 
 
@@ -47,7 +49,8 @@ function App() {
         onLogin={handleLogin}
         onLogout={handleLogout}
       />
-      {/* <Mapping /> */}
+      <Mapping />
+      <FruitList />
     </div >
   );
 }
