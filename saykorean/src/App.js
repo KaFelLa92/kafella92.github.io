@@ -13,9 +13,9 @@ import AlertButton from './components/AlertButton.js';
 import ToggleButton from './components/ToggleButton.js';
 import Greeting from './components/Greeting.js';
 import { useState } from 'react';
-import LoginButton from './components/LoginButton.js';
-import LogoutButton from './components/LogoutButton.js';
 import DataLoader from './components/DataLoader.js';
+import Mapping from './components/Mapping.js';
+
 
 
 function App() {
@@ -24,8 +24,9 @@ function App() {
   const handleLogout = () => setIsLoggedIn(false);
 
   return (
-
     <div>
+      {/* 리턴값 내부 주석처리. 졸라기네*/}
+
       <Welcome name="최동진" />
       <Welcome name="Gemini" />
       <MyProfile />
@@ -39,6 +40,14 @@ function App() {
       <RandomNumber />
       <WatchCounter />
       <DataLoader />
+      <AlertButton />
+      <ToggleButton />
+      <Greeting
+        isLoggedIn={isLoggedIn}
+        onLogin={handleLogin}
+        onLogout={handleLogout}
+      />
+      {/* <Mapping /> */}
     </div >
   );
 }
