@@ -5,7 +5,6 @@ import Book from './components/Book';
 import Product from './components/Product';
 import Counter from './components/Counter';
 import Timer from './components/Timer';
-import Stopwatch from './components/Stopwatch.js';
 import Tictok from './components/Tictok';
 import RandomNumber from './components/RandomNumber.js';
 import WatchCounter from './components/WatchCounter.js';
@@ -16,7 +15,6 @@ import { useState } from 'react';
 import DataLoader from './components/DataLoader.js';
 import Mapping from './components/Mapping.js';
 import FruitList from './components/FruitList.js';
-
 
 
 
@@ -37,7 +35,6 @@ function App() {
       <Product name="정동진쌀 10kg" price="21,000" />
       <Counter></Counter>
       <Timer></Timer>
-      <Stopwatch />
       <Tictok></Tictok>
       <RandomNumber />
       <WatchCounter />
