@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마음전서구 - 심리테스트</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div id="quiz-box">
+            <div class="status-bar">
+                <p id="progress-text">Q1</p>
+            </div>
+            <h2 id="question">질문을 불러오는 중입니다...</h2>
+            <div id="answers" class="answer-buttons">
+                <!-- 답변 버튼들이 여기에 동적으로 추가됩니다. -->
+            </div>
+        </div>
+        <div id="result-box" class="hidden">
+            <h2>테스트 결과</h2>
+            <p>당신의 선물 유형은...</p>
+            <h3 id="result-type"></h3>
+            <pre id="result-scores"></pre>
+            <button onclick="location.reload()">다시하기</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -44,56 +44,124 @@
   "questions": [
     {
       "question_id": 1,
-      "question_text": "선물받을 그 사람이 가장 먼저 할 말은?",
+      "question_text": "Q1. 다양한 선물을 준비한 당신, 선물을 받은 그 사람이 가장 먼저 할 말은?",
       "answers": [
         {
           "answer_id": 1,
-          "answer_text": "\"와, 이거 완전 내 취향인데?\"",
-          "score": { "취향형": 3, "감성형": 1 }
+          "answer_text": "오, 이거 어떻게 알았어? 딱 필요했는데!",
+          "score": { "실용형": 3 },
+          "next_question_id": 2
         },
         {
           "answer_id": 2,
-          "answer_text": "\"오, 이거 어떻게 알았어? 딱 필요했는데!\"",
-          "score": { "실용형": 3, "취향형": 1 }
+          "answer_text": "와, 이거 완전 내 취향인데?",
+          "score": { "취향형": 3 },
+          "next_question_id": 3
         },
         {
           "answer_id": 3,
-          "answer_text": "\"네가 나를 위해 준비했다는 마음이 더 소중해.\"",
-          "score": { "감성형": 3, "경험형": 1 }
+          "answer_text": "네가 나를 위해 준비했다는 마음이 더 소중해.",
+          "score": { "감성형": 3 },
+          "next_question_id": 4
         },
         {
           "answer_id": 4,
-          "answer_text": "\"다음에 같이 쓰면 좋겠다!\"",
-          "score": { "경험형": 3, "실용형": 1 }
+          "answer_text": "다음에 같이 쓰면 좋겠다!",
+          "score": { "경험형": 3 },
+          "next_question_id": 5
         }
       ]
     },
     {
-        "question_id": 2,
-        "question_text": "그 사람과 함께하는 주말, 어떤 활동을 가장 즐길 것 같나요?",
-        "answers": [
-          {
-            "answer_id": 5,
-            "answer_text": "집에서 함께 영화나 드라마 보기",
-            "score": { "실용형": 2, "감성형": 2 }
-          },
-          {
-            "answer_id": 6,
-            "answer_text": "새로운 맛집이나 카페 찾아가기",
-            "score": { "취향형": 3, "경험형": 1 }
-          },
-          {
-            "answer_id": 7,
-            "answer_text": "전시회나 공연 관람하기",
-            "score": { "경험형": 3, "감성형": 1 }
-          },
-          {
-            "answer_id": 8,
-            "answer_text": "함께 운동이나 액티비티 즐기기",
-            "score": { "실용형": 1, "경험형": 3 }
-          }
-        ]
-      }
+      "question_id": 2, 
+      "question_text": "Q2. (실용) 그 사람에게 더 필요한 아이템은?",
+      "answers": [
+        { "answer_id": 5, "answer_text": "매일 입을 수 있는 베이직한 옷", "score": { "실용형": 2, "의류": 1 }, "next_question_id": 6 },
+        { "answer_id": 6, "answer_text": "삶의 질을 높여줄 소형 가전", "score": { "실용형": 2, "전자기기": 1 }, "next_question_id": 6 },
+        { "answer_id": 7, "answer_text": "피로를 풀어줄 건강 보조제", "score": { "실용형": 2, "건강": 1 }, "next_question_id": 6 },
+        { "answer_id": 8, "answer_text": "깔끔한 정리를 위한 수납 용품", "score": { "실용형": 2, "인테리어": 1 }, "next_question_id": 6 }
+      ]
+    },
+    {
+      "question_id": 3,
+      "question_text": "Q3. (취향) 그 사람은 어떤 종류의 향을 더 좋아하나요?",
+      "answers": [
+        { "answer_id": 9, "answer_text": "은은하게 퍼지는 비누나 코튼 향", "score": { "취향형": 2, "향수": 1 }, "next_question_id": 7 },
+        { "answer_id": 10, "answer_text": "깊고 묵직한 우디나 머스크 향", "score": { "취향형": 2, "향수": 1 }, "next_question_id": 7 },
+        { "answer_id": 11, "answer_text": "달콤하고 부드러운 과일이나 바닐라 향", "score": { "취향형": 2, "디저트": 1 }, "next_question_id": 7 },
+        { "answer_id": 12, "answer_text": "톡 쏘는 상쾌한 시트러스나 민트 향", "score": { "취향형": 2, "주류": 1 }, "next_question_id": 7 }
+      ]
+    },
+    {
+      "question_id": 4,
+      "question_text": "Q4. (감성) 그 사람과의 가장 소중한 추억은 무엇인가요?",
+      "answers": [
+        { "answer_id": 13, "answer_text": "함께 여행했던 즐거운 기억", "score": { "감성형": 2, "경험형": 1 }, "next_question_id": 8 },
+        { "answer_id": 14, "answer_text": "힘들 때 곁에서 위로해주었던 순간", "score": { "감성형": 2 }, "next_question_id": 8 },
+        { "answer_id": 15, "answer_text": "함께 맛있는 음식을 먹으며 웃었던 날", "score": { "감성형": 1, "취향형": 1 }, "next_question_id": 8 },
+        { "answer_id": 16, "answer_text": "평범하지만 함께여서 좋았던 모든 날들", "score": { "감성형": 2 }, "next_question_id": 8 }
+      ]
+    },
+    {
+      "question_id": 5,
+      "question_text": "Q5. (경험) 함께 하고 싶은 활동은 어떤 종류인가요?",
+      "answers": [
+        { "answer_id": 17, "answer_text": "새로운 것을 배우는 원데이 클래스", "score": { "경험형": 2 }, "next_question_id": 9 },
+        { "answer_id": 18, "answer_text": "아름다운 풍경을 보러 떠나는 여행", "score": { "경험형": 2, "감성형": 1 }, "next_question_id": 9 },
+        { "answer_id": 19, "answer_text": "짜릿한 스릴을 느낄 수 있는 액티비티", "score": { "경험형": 2 }, "next_question_id": 9 },
+        { "answer_id": 20, "answer_text": "편안한 공간에서 즐기는 마사지나 스파", "score": { "경험형": 1, "실용형": 1 }, "next_question_id": 9 }
+      ]
+    },
+    {
+      "question_id": 6,
+      "question_text": "Q6. (실용) 선물을 고를 때 가장 중요하게 생각하는 것은?",
+      "answers": [
+        { "answer_id": 21, "answer_text": "오래 사용할 수 있는 내구성", "score": { "실용형": 1 }, "next_question_id": 10 },
+        { "answer_id": 22, "answer_text": "실생활에 바로 적용할 수 있는 유용성", "score": { "실용형": 1 }, "next_question_id": 10 },
+        { "answer_id": 23, "answer_text": "디자인이 예뻐서 볼 때마다 기분 좋은 것", "score": { "취향형": 1 }, "next_question_id": 10 },
+        { "answer_id": 24, "answer_text": "가성비가 좋아서 부담 없는 것", "score": { "실용형": 1 }, "next_question_id": 10 }
+      ]
+    },
+    {
+      "question_id": 7,
+      "question_text": "Q7. (취향) 그 사람의 평소 스타일은 어떤가요?",
+      "answers": [
+        { "answer_id": 25, "answer_text": "편안하고 캐주얼한 스타일", "score": { "의류": 1 }, "next_question_id": 10 },
+        { "answer_id": 26, "answer_text": "깔끔하고 모던한 미니멀리즘 스타일", "score": { "인테리어": 1 }, "next_question_id": 10 },
+        { "answer_id": 27, "answer_text": "개성 있고 트렌디한 스타일", "score": { "의류": 1 }, "next_question_id": 10 },
+        { "answer_id": 28, "answer_text": "고급스럽고 클래식한 스타일", "score": { "주류": 1 }, "next_question_id": 10 }
+      ]
+    },
+    {
+      "question_id": 8,
+      "question_text": "Q8. (감성) 편지에 어떤 말을 담고 싶으신가요?",
+      "answers": [
+        { "answer_id": 29, "answer_text": "항상 고맙고 감사하다는 말", "score": { "감성형": 1 }, "next_question_id": 10 },
+        { "answer_id": 30, "answer_text": "앞으로도 좋은 관계를 이어가고 싶다는 말", "score": { "감성형": 1 }, "next_question_id": 10 },
+        { "answer_id": 31, "answer_text": "그 사람의 장점을 칭찬하는 말", "score": { "감성형": 1 }, "next_question_id": 10 },
+        { "answer_id": 32, "answer_text": "재미있고 유쾌한 농담", "score": { "취향형": 1 }, "next_question_id": 10 }
+      ]
+    },
+    {
+      "question_id": 9,
+      "question_text": "Q9. (경험) 어떤 종류의 장소에서 시간을 보내고 싶나요?",
+      "answers": [
+        { "answer_id": 33, "answer_text": "조용하고 아늑한 분위기의 공간", "score": { "감성형": 1 }, "next_question_id": 10 },
+        { "answer_id": 34, "answer_text": "활기차고 사람들이 많은 곳", "score": { "경험형": 1 }, "next_question_id": 10 },
+        { "answer_id": 35, "answer_text": "아름다운 자연을 느낄 수 있는 야외", "score": { "경험형": 1 }, "next_question_id": 10 },
+        { "answer_id": 36, "answer_text": "새롭고 이색적인 경험을 할 수 있는 곳", "score": { "경험형": 1 }, "next_question_id": 10 }
+      ]
+    },
+    {
+      "question_id": 10,
+      "question_text": "Q10. 마지막으로, 선물을 통해 전달하고 싶은 가장 중요한 메시지는 무엇인가요?",
+      "answers": [
+        { "answer_id": 37, "answer_text": "'너의 일상이 더 편안해졌으면 해'", "score": { "실용형": 2 }, "next_question_id": null },
+        { "answer_id": 38, "answer_text": "'너의 취향을 존중하고 응원해'", "score": { "취향형": 2 }, "next_question_id": null },
+        { "answer_id": 39, "answer_text": "'너는 나에게 정말 소중한 사람이야'", "score": { "감성형": 2 }, "next_question_id": null },
+        { "answer_id": 40, "answer_text": "'너와 함께 더 많은 시간을 보내고 싶어'", "score": { "경험형": 2 }, "next_question_id": null }
+      ]
+    }
   ],
   "letter_templates": [
     {
