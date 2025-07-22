@@ -1,0 +1,112 @@
+{
+  "gifts": [
+    {
+      "gift_id": 1,
+      "category": "실용형",
+      "sub_category": "의류",
+      "brand": "유니클로",
+      "product_name": "에어리즘 코튼 오버사이즈 크루넥T",
+      "price": 19900,
+      "tags": ["#데일리", "#편안함", "#가성비"],
+      "image_url": "https://image.uniqlo.com/UQ/ST3/kr/imagesgoods/455359/item/krgoods_00_455359.jpg"
+    },
+    {
+      "gift_id": 2,
+      "category": "취향형",
+      "sub_category": "주류",
+      "brand": "탈리스커",
+      "product_name": "탈리스커 10년",
+      "price": 75000,
+      "tags": ["#위스키", "#피트", "#싱글몰트"],
+      "image_url": "image_url_here"
+    },
+    {
+        "gift_id": 3,
+        "category": "감성형",
+        "sub_category": "꽃",
+        "brand": "꾸까",
+        "product_name": "시그니처 부케",
+        "price": 35900,
+        "tags": ["#기념일", "#로맨틱", "#감동"],
+        "image_url": "https://kukka.kr/_next/image?url=https%3A%2F%2Fd3mfl88l06f3el.cloudfront.net%2Fproduction%2F37533%2Fdesktop%2Fmain-w.jpg&w=1920&q=75"
+    },
+    {
+        "gift_id": 4,
+        "category": "경험형",
+        "sub_category": "원데이클래스",
+        "brand": "솜씨당",
+        "product_name": "가죽공예 원데이 클래스",
+        "price": 50000,
+        "tags": ["#체험", "#핸드메이드", "#커플"],
+        "image_url": "image_url_here"
+    }
+  ],
+  "questions": [
+    {
+      "question_id": 1,
+      "question_text": "선물받을 그 사람이 가장 먼저 할 말은?",
+      "answers": [
+        {
+          "answer_id": 1,
+          "answer_text": "\"와, 이거 완전 내 취향인데?\"",
+          "score": { "취향형": 3, "감성형": 1 }
+        },
+        {
+          "answer_id": 2,
+          "answer_text": "\"오, 이거 어떻게 알았어? 딱 필요했는데!\"",
+          "score": { "실용형": 3, "취향형": 1 }
+        },
+        {
+          "answer_id": 3,
+          "answer_text": "\"네가 나를 위해 준비했다는 마음이 더 소중해.\"",
+          "score": { "감성형": 3, "경험형": 1 }
+        },
+        {
+          "answer_id": 4,
+          "answer_text": "\"다음에 같이 쓰면 좋겠다!\"",
+          "score": { "경험형": 3, "실용형": 1 }
+        }
+      ]
+    },
+    {
+        "question_id": 2,
+        "question_text": "그 사람과 함께하는 주말, 어떤 활동을 가장 즐길 것 같나요?",
+        "answers": [
+          {
+            "answer_id": 5,
+            "answer_text": "집에서 함께 영화나 드라마 보기",
+            "score": { "실용형": 2, "감성형": 2 }
+          },
+          {
+            "answer_id": 6,
+            "answer_text": "새로운 맛집이나 카페 찾아가기",
+            "score": { "취향형": 3, "경험형": 1 }
+          },
+          {
+            "answer_id": 7,
+            "answer_text": "전시회나 공연 관람하기",
+            "score": { "경험형": 3, "감성형": 1 }
+          },
+          {
+            "answer_id": 8,
+            "answer_text": "함께 운동이나 액티비티 즐기기",
+            "score": { "실용형": 1, "경험형": 3 }
+          }
+        ]
+      }
+  ],
+  "letter_templates": [
+    {
+      "template_id": 1,
+      "tone": "다정한",
+      "occasion": "생일",
+      "template": "{recipient_name}에게,\n\n생일 진심으로 축하해! 🎉\n\n{sender_name}이(가) 너를 얼마나 생각하는지, 이 편지에 고스란히 담겨있어. 너는 {user_trait} 사람이라, {gift_category} 선물이 잘 어울릴 것 같았대. 이 선물이 너의 일상에 작은 기쁨이 되었으면 좋겠다.\n\n앞으로도 우리 우정 변치 말자!\n\n사랑을 담아,\n{sender_name}"
+    },
+    {
+        "template_id": 2,
+        "tone": "재치있는",
+        "occasion": "기념일",
+        "template": "To. {recipient_name}\n\n짜잔! 우리의 특별한 날을 기념하여 선물을 준비했어. 바로 {gift_name}이야!\n\n{sender_name}의 센스, 어때? 😉 널 생각하며 고심 끝에 고른 이 선물이 네 마음에 쏙 들었으면 좋겠다. 앞으로도 재미있는 추억 많이 만들자!\n\nFrom. {sender_name}"
+    }
+  ]
+}
