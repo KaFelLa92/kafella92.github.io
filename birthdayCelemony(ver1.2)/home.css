@@ -113,12 +113,12 @@ body {
 .headNav li a {
     font-family: 'GumiRomanceTTF';
     font-size: 1.6vw;
-    color: #bbbf49;
+    color: #fff099;
     margin-left: 50px;
 }
 
 .headNav li a:hover {
-    color: #edf252;
+    color: #ffff66;
 }
 
 .headNav li a:active {
@@ -199,7 +199,7 @@ body {
 /* 히어로섹션 시작 */
 #hero {
     padding-top: 150px;
-    background-color: #EDF252;
+    background-color: #ffff66;
 }
 
 .heroImg {
@@ -254,7 +254,7 @@ body {
 /* 본문 컨테이너 */
 #container {
     width: 100%;
-    background-color: #bbbf49;
+    background-color: #fff099;
 }
 
 
@@ -265,7 +265,7 @@ body {
     margin: 0 auto;
     padding: 5%;
     background-color: white;
-    border: 3px solid #edf252;
+    border: 3px solid #ffff66;
 }
 
 .blank {
@@ -294,7 +294,7 @@ body {
     width: 35%;
     /* 고정 길이 */
     height: 3px;
-    background-color: #bbbf49;
+    background-color: #fff099;
     /* 청록색 */
 }
 
@@ -317,11 +317,11 @@ body {
 /* 본문 특파원소개 시작 */
 
 .aboutBox {
-    background-color: #edf252;
+    background-color: #ffff66;
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 3px solid #BBBF49;
+    border: 3px solid #fff099;
     box-shadow: 0 8px 16px #737373;
     border-radius: 10px;
     min-height: 200px;
@@ -330,7 +330,7 @@ body {
 }
 
 .aboutBox:hover {
-    background-color: #BBBF49;
+    background-color: #fff099;
 }
 
 .aboutImg {
@@ -397,7 +397,7 @@ body {
     position: absolute;
     top: -20px;
     right: -60px;
-    background-color: #EDF252;
+    background-color: #ffff66;
     border: 2px solid #737373;
     border-radius: 5px;
     padding: 6px 10px;
@@ -441,7 +441,7 @@ body {
 
 .mainBtn {
     font-size: 20px;
-    color: #edf252;
+    color: #ffff66;
     background-color: #020126;
     border: 0;
     width: 200px;
@@ -454,12 +454,12 @@ body {
 .mainBtn:hover {
     font-weight: bold;
     color: #0D0D0D;
-    background-color: #bbbf49;
+    background-color: #fff099;
     border: 2px solid #737373;
 }
 
 .mainBtn:active {
-    background-color: #EDF252;
+    background-color: #ffff66;
 }
 
 /* 본문 반응형 */
@@ -553,8 +553,8 @@ body {
 }
 
 .newsBox {
-    background-color: #edf252;
-    border: 3px solid #BBBF49;
+    background-color: #ffff66;
+    border: 3px solid #fff099;
     box-shadow: 0 8px 16px #737373;
     border-radius: 10px;
     width: 100%;
@@ -575,7 +575,7 @@ body {
 }
 
 .newsThumb:hover {
-    background-color: #BBBF49;
+    background-color: #fff099;
     border-radius: 20px;
 }
 
@@ -654,8 +654,8 @@ body {
     background-image: repeating-linear-gradient(to bottom,
             transparent,
             transparent calc(1.6em - 2px),
-            #edf252 calc(1.6em - 2px),
-            #edf252 1.6em);
+            #ffff66 calc(1.6em - 2px),
+            #ffff66 1.6em);
     background-size: 100% 1.6em;
     background-position-y: 1em;
     /* 선을 약간 아래로 내리기 */
@@ -680,8 +680,8 @@ body {
 }
 
 .purunContain {
-    background-color: #edf252;
-    border: 3px solid #BBBF49;
+    background-color: #ffff66;
+    border: 3px solid #fff099;
     box-shadow: 0 8px 16px #737373;
     border-radius: 10px;
     width: 100%;
@@ -757,7 +757,7 @@ body {
 .footSince {
     font-family: 'GumiRomanceTTF';
     font-size: 30px;
-    color: #bbbf49;
+    color: #fff099;
 }
 
 /* 푸터 종료 */
