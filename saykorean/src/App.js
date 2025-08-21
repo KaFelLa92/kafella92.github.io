@@ -16,9 +16,7 @@ import DataLoader from './components/DataLoader.js';
 import Mapping from './components/Mapping.js';
 import FruitList from './components/FruitList.js';
 
-
-
-function App() {
+const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const handleLogin = () => setIsLoggedIn(true);
   const handleLogout = () => setIsLoggedIn(false);
