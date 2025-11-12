@@ -1,5 +1,15 @@
 <!DOCTYPE html>
 <html lang="ko">
+    <!-- 개선해야할 거 
+        1) 카테고리 선택 시, 초기화되지 않고 빠져나올 수 있는 X버튼 추가
+        2) 최종 단계 오브젝트 병합 시 사라지게 만들어서 무한모드 가능하게 하기
+        3) 드래그 시작 부분에서 오브젝트가 떨어짐. 드래그 놓을 때 떨어뜨리도록 변경
+        4) 오브젝트가 좌우로 나갈 수 있는 경계선 만들어야함
+        5) 오브젝트를 떨어뜨리자마자, 사용자가 들고 있는 오브젝트가 다음 오브젝트로 변경되어야함
+        6) 오브젝트 떨어뜨릴 때, 플레이어가 인지할 수 있도록 효과음 집어넣기
+        7) bgm
+        8) 지금 현재 쥐고 있는 오브젝트가 next로 표시됨. 그 다음 오브젝트를 next로 표시해야함
+    -->
 
 <head>
     <meta charset="UTF-8">
@@ -28,8 +38,7 @@
         #gameContainer {
             position: relative;
             width: 380px;
-            height: 100vh;
-            max-height: 800px;
+            height: 650px;
             background: #FFF9E6;
             border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
@@ -437,10 +446,10 @@
                 { name: '자몽', color: '#ffb8b8', size: 65, shape: 'circle' },
                 { name: '파인애플', color: '#f9ca24', size: 70, shape: 'pineapple' },
                 { name: '멜론', color: '#95e1d3', size: 75, shape: 'oval' },
-                { name: '망고', color: '#feca57', size: 80, shape: 'mango' },
-                { name: '용과', color: '#ff6348', size: 85, shape: 'oval' },
-                { name: '수박', color: '#38ada9', size: 90, shape: 'circle' },
-                { name: '과일바구니', color: '#cd84f1', size: 150, shape: 'basket' }
+                { name: '망고', color: '#feca57', size: 100, shape: 'mango' },
+                { name: '용과', color: '#ff6348', size: 115, shape: 'oval' },
+                { name: '수박', color: '#38ada9', size: 150, shape: 'circle' },
+                { name: '과일바구니', color: '#cd84f1', size: 200, shape: 'basket' }
             ],
             vehicle: [
                 { name: '킥보드', color: '#74b9ff', size: 30, shape: 'kickboard' },
@@ -451,9 +460,9 @@
                 { name: '버스', color: '#f39c12', size: 80, shape: 'bus' },
                 { name: '기차', color: '#e17055', size: 90, shape: 'train' },
                 { name: '비행기', color: '#00b894', size: 95, shape: 'airplane' },
-                { name: '우주선', color: '#a29bfe', size: 85, shape: 'spaceship' },
-                { name: '로켓', color: '#e84393', size: 75, shape: 'rocket' },
-                { name: 'UFO', color: '#00cec9', size: 150, shape: 'ufo' }
+                { name: '우주선', color: '#a29bfe', size: 105, shape: 'spaceship' },
+                { name: '로켓', color: '#e84393', size: 150, shape: 'rocket' },
+                { name: 'UFO', color: '#00cec9', size: 200, shape: 'ufo' }
             ],
             animal: [
                 { name: '개미', color: '#2d3436', size: 20, shape: 'circle' },
@@ -465,8 +474,8 @@
                 { name: '곰', color: '#8b4513', size: 75, shape: 'circle' },
                 { name: '사자', color: '#f39c12', size: 85, shape: 'circle' },
                 { name: '코끼리', color: '#95a5a6', size: 95, shape: 'circle' },
-                { name: '고래', color: '#3498db', size: 100, shape: 'whale' },
-                { name: '용', color: '#9b59b6', size: 150, shape: 'dragon' }
+                { name: '고래', color: '#3498db', size: 150, shape: 'whale' },
+                { name: '용', color: '#9b59b6', size: 200, shape: 'dragon' }
             ],
             nature: [
                 { name: '새싹', color: '#b8e994', size: 25, shape: 'sprout' },
@@ -478,8 +487,8 @@
                 { name: '정원', color: '#38ada9', size: 85, shape: 'circle' },
                 { name: '산', color: '#8395a7', size: 90, shape: 'mountain' },
                 { name: '밀림', color: '#05c46b', size: 95, shape: 'circle' },
-                { name: '대지', color: '#8b7355', size: 100, shape: 'circle' },
-                { name: '행성', color: '#4834df', size: 150, shape: 'circle' }
+                { name: '대지', color: '#8b7355', size: 150, shape: 'circle' },
+                { name: '행성', color: '#4834df', size: 200, shape: 'circle' }
             ],
             tool: [
                 { name: '돌', color: '#95a5a6', size: 30, shape: 'stone' },
@@ -488,11 +497,11 @@
                 { name: '활', color: '#d35400', size: 55, shape: 'bow' },
                 { name: '종이', color: '#ecf0f1', size: 50, shape: 'paper' },
                 { name: '대포', color: '#34495e', size: 65, shape: 'cannon' },
-                { name: '시계', color: '#f39c12', size: 60, shape: 'circle' },
-                { name: '전구', color: '#f1c40f', size: 55, shape: 'bulb' },
-                { name: '컴퓨터', color: '#3498db', size: 75, shape: 'computer' },
-                { name: '로봇', color: '#9b59b6', size: 85, shape: 'robot' },
-                { name: 'AI', color: '#e74c3c', size: 100, shape: 'circle' }
+                { name: '시계', color: '#f39c12', size: 70, shape: 'circle' },
+                { name: '전구', color: '#f1c40f', size: 80, shape: 'bulb' },
+                { name: '컴퓨터', color: '#3498db', size: 100, shape: 'computer' },
+                { name: '로봇', color: '#9b59b6', size: 150, shape: 'robot' },
+                { name: 'AI', color: '#e74c3c', size: 200, shape: 'circle' }
             ],
             building: [
                 { name: '텐트', color: '#f39c12', size: 35, shape: 'tent' },
@@ -503,9 +512,9 @@
                 { name: '도시', color: '#2c3e50', size: 90, shape: 'circle' },
                 { name: '수도', color: '#34495e', size: 95, shape: 'circle' },
                 { name: '국가', color: '#16a085', size: 100, shape: 'circle' },
-                { name: '대륙', color: '#27ae60', size: 105, shape: 'circle' },
-                { name: '지구', color: '#2980b9', size: 110, shape: 'circle' },
-                { name: '우주정거장', color: '#8e44ad', size: 100, shape: 'station' }
+                { name: '대륙', color: '#27ae60', size: 115, shape: 'circle' },
+                { name: '지구', color: '#2980b9', size: 150, shape: 'circle' },
+                { name: '우주정거장', color: '#8e44ad', size: 200, shape: 'station' }
             ]
         };
 
