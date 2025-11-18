@@ -349,22 +349,57 @@
             }
         }
 
+        // 보스 기믹 데이터
+        const bossMechanics = {
+            rhythm: {
+                name: '운율수호자',
+                image: 'rhythm.png',
+                description: '자음, 모음, 자음, 모음, 자음 순서로\n한글을 받아내세요!\n5번 연속 성공하면 통과!',
+                targetCount: 5,
+                pattern: ['consonant', 'vowel', 'consonant', 'vowel', 'consonant'],
+                bonus: 500
+            },
+            sculpting: {
+                name: '단어조각가',
+                image: 'sculpting.png',
+                description: '자음과 모음을 조합해\n단어가 되도록 받으세요!\n(자음+모음 3세트 완성)',
+                targetCount: 3,
+                bonus: 300
+            },
+            outlaw: {
+                name: '혼종추방자',
+                image: 'outlaw.png',
+                description: '15초 동안 이중모음, 이중자음을\n피하고 다른 것만 받으세요!',
+                duration: 15,
+                bonus: 400
+            }
+        };
+
         // 게임 상태
         let gameState = {
             score: 0,
             hearts: 3,
+            shield: 0,
             isRunning: false,
-            currentTurn: 'consonant', // 'consonant' or 'vowel'
+            currentTurn: 'consonant',
             characterPosition: 160,
             fallingItems: [],
             turnCount: 0,
             itemsCaught: 0,
-            isCountingDown: false
+            isCountingDown: false,
+            bossActive: false,
+            currentBoss: null,
+            bossProgress: 0,
+            bossStartTime: 0,
+            bossPatternIndex: 0,
+            lastWordPart: null
         };
 
         // 한글 자음과 모음
         const consonants = ['ㄱ', 'ㄴ', 'ㄷ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅅ', 'ㅇ', 'ㅈ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ'];
         const vowels = ['ㅏ', 'ㅑ', 'ㅓ', 'ㅕ', 'ㅗ', 'ㅛ', 'ㅜ', 'ㅠ', 'ㅡ', 'ㅣ'];
+        const doubleConsonants = ['ㄲ', 'ㄸ', 'ㅃ', 'ㅆ', 'ㅉ'];
+        const doubleVowels = ['ㅐ', 'ㅒ', 'ㅔ', 'ㅖ', 'ㅘ', 'ㅙ', 'ㅚ', 'ㅝ', 'ㅞ', 'ㅟ', 'ㅢ'];
 
         // DOM 요소
         const character = document.getElementById('character');
@@ -377,6 +412,7 @@
         const standingTodoli = document.getElementById('standingTodoli');
         const runLeftTodoli = document.getElementById('runLeftTodoli');
         const runRightTodoli = document.getElementById('runRightTodoli');
+        const bossAlert = document.getElementById('bossAlert');
 
         // 캐릭터 이동 상태
         let isMoving = false;
@@ -458,6 +494,119 @@
             startGame();
         }
 
+        // 보스전 시작
+        function startBossMechanic() {
+            const bossKeys = Object.keys(bossMechanics);
+            const randomBoss = bossKeys[Math.floor(Math.random() * bossKeys.length)];
+            const boss = bossMechanics[randomBoss];
+
+            gameState.bossActive = true;
+            gameState.currentBoss = randomBoss;
+            gameState.bossProgress = 0;
+            gameState.bossStartTime = Date.now();
+            gameState.bossPatternIndex = 0;
+            gameState.lastWordPart = null;
+
+            document.getElementById('bossCharacter').src = boss.image;
+            document.getElementById('bossTitle').textContent = `⚡ ${boss.name} ⚡`;
+            document.getElementById('bossDescription').textContent = boss.description;
+            document.getElementById('bossProgress').textContent = '';
+            bossAlert.style.display = 'flex';
+
+            setTimeout(() => {
+                bossAlert.style.display = 'none';
+            }, 3000);
+        }
+
+        // 보스 패턴
+        function checkBossMechanic(caughtItem) {
+            if (!gameState.bossActive) return true;
+
+            const boss = bossMechanics[gameState.currentBoss];
+            let success = false;
+
+            switch (gameState.currentBoss) {
+                case 'rhythm':
+                    const expectedType = boss.pattern[gameState.bossPatternIndex % boss.pattern.length];
+                    if (caughtItem.type === expectedType) {
+                        gameState.bossProgress++;
+                        gameState.bossPatternIndex++;
+                        success = true;
+                        if (gameState.bossProgress >= boss.targetCount) {
+                            completeBoss();
+                        }
+                    } else {
+                        gameState.bossProgress = 0;
+                        gameState.bossPatternIndex = 0;
+                    }
+                    break;
+
+                case 'sculpting':
+                    if (!gameState.lastWordPart) {
+                        if (caughtItem.type === 'consonant') {
+                            gameState.lastWordPart = 'consonant';
+                            success = true;
+                        }
+                    } else if (gameState.lastWordPart === 'consonant' && caughtItem.type === 'vowel') {
+                        gameState.bossProgress++;
+                        gameState.lastWordPart = null;
+                        success = true;
+                        if (gameState.bossProgress >= boss.targetCount) {
+                            completeBoss();
+                        }
+                    } else {
+                        gameState.lastWordPart = null;
+                    }
+                    break;
+
+                case 'outlaw':
+                    const elapsed = (Date.now() - gameState.bossStartTime) / 1000;
+                    if (caughtItem.isDouble) {
+                        gameState.bossActive = false;
+                        showItemEffect('❌ 실패!');
+                        return false;
+                    }
+                    success = true;
+                    if (elapsed >= boss.duration) {
+                        completeBoss();
+                    }
+                    break;
+
+            }
+
+            updateBossProgress();
+            return success;
+        }
+
+        // 보스 진행 과정
+        function updateBossProgress() {
+            if (!gameState.bossActive) return;
+
+            const boss = bossMechanics[gameState.currentBoss];
+            let progressText = '';
+
+            if (gameState.currentBoss === 'outlaw') {
+                const elapsed = Math.floor((Date.now() - gameState.bossStartTime) / 1000);
+                const remaining = boss.duration - elapsed;
+                progressText = `⏱️ ${remaining}초 남음`;
+            } else {
+                progressText = `진행: ${gameState.bossProgress}/${boss.targetCount}`;
+            }
+
+            turnIndicator.textContent = `🎯 ${boss.name} - ${progressText}`;
+            turnIndicator.style.color = '#ff6b35';
+        }
+
+        // 보스 클리어 보상
+        function completeBoss() {
+            const boss = bossMechanics[gameState.currentBoss];
+            gameState.score += boss.bonus;
+            gameState.bossActive = false;
+            showItemEffect(`✨ +${boss.bonus}점!`);
+            updateUI();
+            updateTurnIndicator();
+        }
+
         // 떨어지는 아이템 생성
         function spawnItems() {
             if (!gameState.isRunning || gameState.isCountingDown) return;
@@ -465,18 +614,39 @@
             const item = document.createElement('div');
             item.className = 'falling-item';
 
-            // 랜덤하게 자음 또는 모음 선택 (70% 현재 턴, 30% 반대 턴)
-            const isCurrentTurn = Math.random() < 0.7;
-            const isConsonant = isCurrentTurn ?
-                (gameState.currentTurn === 'consonant') :
-                (gameState.currentTurn === 'vowel');
+            let itemType, letter, isDouble = false, isItem = false;
 
-            const letters = isConsonant ? consonants : vowels;
-            const letter = letters[Math.floor(Math.random() * letters.length)];
+            if (gameState.bossActive && gameState.currentBoss === 'outlaw') {
+                if (Math.random() < 0.4) {
+                    isDouble = true;
+                    const doubles = [...doubleConsonants, ...doubleVowels];
+                    letter = doubles[Math.floor(Math.random() * doubles.length)];
+                    itemType = doubleConsonants.includes(letter) ? 'consonant' : 'vowel';
+                    item.className = 'falling-item double-letter';
+                } else {
+                    itemType = Math.random() < 0.5 ? 'consonant' : 'vowel';
+                    const letters = itemType === 'consonant' ? consonants : vowels;
+                    letter = letters[Math.floor(Math.random() * letters.length)];
+                    item.className = `falling-item ${itemType}`;
+                }
+                item.textContent = letter;
+            } else {
+                const isCurrentTurn = Math.random() < 0.7;
+                itemType = isCurrentTurn ?
+                    gameState.currentTurn :
+                    (gameState.currentTurn === 'consonant' ? 'vowel' : 'consonant');
 
-            item.textContent = letter;
-            item.className = `falling-item ${isConsonant ? 'consonant' : 'vowel'}`;
-            item.dataset.type = isConsonant ? 'consonant' : 'vowel';
+                const letters = itemType === 'consonant' ? consonants : vowels;
+                letter = letters[Math.floor(Math.random() * letters.length)];
+
+                item.textContent = letter;
+                item.className = `falling-item ${itemType}`;
+            }
+
+            item.dataset.type = itemType;
+            item.dataset.letter = letter;
+            item.dataset.isDouble = isDouble;
+            item.dataset.isItem = isItem;
             item.style.left = Math.random() * 330 + 'px';
             item.style.top = '-50px';
 
@@ -487,7 +657,6 @@
                 x: parseFloat(item.style.left)
             });
 
-            // 다음 아이템 생성
             setTimeout(spawnItems, 1500 - Math.min(gameState.score * 10, 800));
         }
 
@@ -532,6 +701,15 @@
                     spawnItems();
                 }
             }, 1000);
+        }
+
+        // 아이템 이펙트
+        function showItemEffect(text) {
+            const effect = document.createElement('div');
+            effect.className = 'item-effect';
+            effect.textContent = text;
+            gameCanvas.appendChild(effect);
+            setTimeout(() => effect.remove(), 1000);
         }
 
         // 게임 루프
@@ -681,15 +859,6 @@
             scoreElement.textContent = gameState.score;
         }
 
-        function updateHearts() {
-            heartsElement.innerHTML = '';
-            for (let i = 0; i < gameState.hearts; i++) {
-                heartsElement.innerHTML += '<span class="heart">❤️</span>';
-            }
-            for (let i = gameState.hearts; i < 3; i++) {
-                heartsElement.innerHTML += '<span class="heart" style="opacity: 0.3;">🖤</span>';
-            }
-        }
 
         function updateTurnIndicator() {
             turnIndicator.textContent = gameState.currentTurn === 'consonant' ? '자음 턴' : '모음 턴';
