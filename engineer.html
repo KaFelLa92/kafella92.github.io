@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#0f172a">
+<title>정보처리기사 실기 암기카드</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body { height: 100%; overflow: hidden; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+  background: #0f172a; color: #e2e8f0; -webkit-user-select: none; user-select: none;
+}
+button { font-family: inherit; cursor: pointer; border: none; outline: none; }
+.page { display: none; height: 100vh; height: 100dvh; flex-direction: column; }
+.page.active { display: flex; }
+
+/* Home */
+.home-header { padding: 28px 20px 20px; background: linear-gradient(180deg, rgba(59,130,246,0.15) 0%, transparent 100%); flex-shrink: 0; }
+.home-sub { font-size: 13px; color: #94a3b8; letter-spacing: 2px; margin-bottom: 6px; font-weight: 600; }
+.home-title { font-size: 24px; font-weight: 800; color: #f1f5f9; line-height: 1.3; }
+.progress-box { margin-top: 16px; background: rgba(255,255,255,0.06); border-radius: 12px; padding: 14px 16px; border: 1px solid rgba(255,255,255,0.08); }
+.progress-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.progress-label { font-size: 13px; color: #94a3b8; }
+.progress-num { font-size: 13px; color: #60a5fa; font-weight: 700; }
+.progress-bar { height: 6px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, #3b82f6, #8b5cf6); border-radius: 3px; transition: width 0.3s; }
+
+.home-scroll { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; padding-bottom: 32px; }
+.btn-row { padding: 12px 20px; display: flex; gap: 10px; }
+.btn-all { flex: 1; padding: 14px 12px; border-radius: 12px; font-weight: 700; font-size: 14px; }
+.btn-order { border: 1px solid rgba(59,130,246,0.3); background: rgba(59,130,246,0.1); color: #60a5fa; }
+.btn-random { border: 1px solid rgba(139,92,246,0.3); background: rgba(139,92,246,0.1); color: #a78bfa; }
+.btn-weak { width: 100%; padding: 14px; border-radius: 12px; border: 1px solid rgba(239,68,68,0.3); background: rgba(239,68,68,0.08); color: #f87171; font-weight: 700; font-size: 14px; margin: 0 20px; width: calc(100% - 40px); }
+.cat-section { padding: 16px 20px 8px; }
+.cat-label { font-size: 13px; color: #64748b; font-weight: 600; margin-bottom: 12px; letter-spacing: 1px; }
+.cat-list { display: flex; flex-direction: column; gap: 8px; }
+.cat-btn { display: flex; align-items: center; padding: 14px 16px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.06); background: rgba(255,255,255,0.03); text-align: left; gap: 14px; width: 100%; }
+.cat-icon { width: 42px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+.cat-info { flex: 1; min-width: 0; }
+.cat-name { font-size: 14px; font-weight: 700; color: #e2e8f0; margin-bottom: 4px; }
+.cat-meta { font-size: 12px; color: #64748b; }
+.cat-badge { width: 36px; height: 36px; border-radius: 18px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; }
+
+/* Card View */
+.card-header { display: flex; align-items: center; padding: 14px 16px; border-bottom: 1px solid rgba(255,255,255,0.06); flex-shrink: 0; }
+.btn-home { background: none; color: #94a3b8; font-size: 14px; padding: 4px 8px; font-weight: 600; }
+.card-cat { flex: 1; text-align: center; font-size: 12px; color: #64748b; }
+.card-count { font-size: 13px; color: #64748b; font-weight: 600; }
+.card-progress { height: 3px; background: rgba(255,255,255,0.05); flex-shrink: 0; }
+.card-progress-fill { height: 100%; transition: width 0.3s; }
+
+.card-body { flex: 1; display: flex; flex-direction: column; padding: 20px 16px; gap: 16px; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+.q-box { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 24px 20px; border-left: 4px solid var(--accent); }
+.q-label { font-size: 11px; color: #64748b; font-weight: 600; margin-bottom: 10px; letter-spacing: 1px; }
+.q-text { font-size: 15px; line-height: 1.7; white-space: pre-line; color: #e2e8f0; font-weight: 500; }
+
+.a-box { border-radius: 16px; padding: 24px 20px; cursor: pointer; transition: all 0.2s; min-height: 80px; display: flex; flex-direction: column; justify-content: center; }
+.a-box.hidden { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); }
+.a-box.shown { background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.2); }
+.a-hint { text-align: center; color: #475569; font-size: 14px; font-weight: 600; padding: 12px 0; }
+.a-label { font-size: 11px; color: #60a5fa; font-weight: 600; margin-bottom: 10px; letter-spacing: 1px; }
+.a-text { font-size: 17px; line-height: 1.7; white-space: pre-line; color: #f1f5f9; font-weight: 700; }
+
+.btn-known { padding: 14px; border-radius: 12px; font-weight: 700; font-size: 14px; transition: all 0.2s; width: 100%; }
+.btn-known.off { background: rgba(255,255,255,0.04); color: #94a3b8; }
+.btn-known.on { background: rgba(34,197,94,0.15); color: #4ade80; }
+
+.card-nav { display: flex; gap: 10px; padding: 12px 16px; flex-shrink: 0; border-top: 1px solid rgba(255,255,255,0.06); padding-bottom: max(24px, env(safe-area-inset-bottom)); }
+.nav-btn { flex: 1; padding: 14px; border-radius: 12px; font-weight: 700; font-size: 14px; }
+.nav-prev, .nav-next { background: rgba(255,255,255,0.06); color: #94a3b8; }
+.nav-prev.off, .nav-next.off { background: rgba(255,255,255,0.02); color: #334155; }
+.nav-flip { flex: 1.5; }
+
+/* Done page */
+.done-page { align-items: center; justify-content: center; padding: 40px; }
+.done-emoji { font-size: 48px; margin-bottom: 16px; }
+.done-title { font-size: 20px; font-weight: 800; margin-bottom: 8px; }
+.done-sub { font-size: 14px; color: #94a3b8; margin-bottom: 24px; }
+.done-btn { padding: 12px 32px; border-radius: 10px; background: #3b82f6; color: #fff; font-weight: 700; font-size: 15px; }
+
+/* Reset modal */
+.modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); z-index: 100; align-items: center; justify-content: center; padding: 24px; }
+.modal-overlay.active { display: flex; }
+.modal-box { background: #1e293b; border-radius: 16px; padding: 24px; max-width: 320px; width: 100%; text-align: center; }
+.modal-title { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+.modal-desc { font-size: 13px; color: #94a3b8; margin-bottom: 20px; line-height: 1.5; }
+.modal-btns { display: flex; gap: 10px; }
+.modal-btns button { flex: 1; padding: 12px; border-radius: 10px; font-weight: 700; font-size: 14px; }
+.modal-cancel { background: rgba(255,255,255,0.06); color: #94a3b8; }
+.modal-confirm { background: rgba(239,68,68,0.2); color: #f87171; }
+</style>
+</head>
+<body>
+
+<!-- Home Page -->
+<div id="homePage" class="page active">
+  <div class="home-header">
+    <div class="home-sub">정보처리기사 실기</div>
+    <h1 class="home-title">키워드 암기카드</h1>
+    <div class="progress-box">
+      <div class="progress-top">
+        <span class="progress-label">학습 진도</span>
+        <span class="progress-num" id="homeProgress">0/0</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="homeProgressBar" style="width:0%"></div></div>
+    </div>
+  </div>
+  <div class="home-scroll">
+    <div class="btn-row">
+      <button class="btn-all btn-order" onclick="startAll(false)">📖 전체 순서대로</button>
+      <button class="btn-all btn-random" onclick="startAll(true)">🔀 전체 랜덤</button>
+    </div>
+    <div style="padding:0 20px 8px">
+      <button class="btn-weak" id="btnWeak" onclick="startWeak()">🔥 아직 모르는 문제만</button>
+    </div>
+    <div class="cat-section">
+      <div class="cat-label">주제별 학습</div>
+      <div class="cat-list" id="catList"></div>
+    </div>
+    <div style="padding:16px 20px">
+      <button onclick="showResetModal()" style="width:100%;padding:12px;border-radius:10px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);color:#64748b;font-size:13px;font-weight:600">
+        🗑️ 학습 기록 초기화
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Card Page -->
+<div id="cardPage" class="page">
+  <div class="card-header">
+    <button class="btn-home" onclick="goHome()">← 홈</button>
+    <div class="card-cat" id="cardCat"></div>
+    <span class="card-count" id="cardCount"></span>
+  </div>
+  <div class="card-progress"><div class="card-progress-fill" id="cardProgressBar"></div></div>
+  <div class="card-body" id="cardBody">
+    <div class="q-box" id="qBox">
+      <div class="q-label">Q. 문제</div>
+      <div class="q-text" id="qText"></div>
+    </div>
+    <div class="a-box hidden" id="aBox" onclick="toggleFlip()">
+      <div class="a-hint" id="aHint">탭하여 정답 확인 👆</div>
+      <div id="aContent" style="display:none">
+        <div class="a-label">A. 정답</div>
+        <div class="a-text" id="aText"></div>
+      </div>
+    </div>
+    <button class="btn-known off" id="btnKnown" style="display:none" onclick="toggleKnown()"></button>
+  </div>
+  <div class="card-nav">
+    <button class="nav-btn nav-prev" id="btnPrev" onclick="prevCard()">← 이전</button>
+    <button class="nav-btn nav-flip" id="btnFlip" onclick="toggleFlip()">정답 보기</button>
+    <button class="nav-btn nav-next" id="btnNext" onclick="nextCard()">다음 →</button>
+  </div>
+</div>
+
+<!-- Done Page -->
+<div id="donePage" class="page done-page">
+  <div class="done-emoji">🎉</div>
+  <div class="done-title">모두 완료!</div>
+  <div class="done-sub">모든 문제를 암기했습니다</div>
+  <button class="done-btn" onclick="goHome()">홈으로</button>
+</div>
+
+<!-- Reset Modal -->
+<div class="modal-overlay" id="resetModal">
+  <div class="modal-box">
+    <div class="modal-title">학습 기록 초기화</div>
+    <div class="modal-desc">암기 완료 체크가 모두 초기화됩니다.<br>정말 초기화할까요?</div>
+    <div class="modal-btns">
+      <button class="modal-cancel" onclick="hideResetModal()">취소</button>
+      <button class="modal-confirm" onclick="doReset()">초기화</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ===== DATA =====
+const CATEGORIES = [
+  { name:"소프트웨어 공학", icon:"⚙️", color:"#2563eb", cards:[
+    {q:"시제품을 끊임없이 제작하며 사이클을 반복하는 개발 방법론. 워터폴과 대조적이며, 고객의 변화하는 요구사항에 능동적",a:"애자일(Agile)"},
+    {q:"프로그램의 외부 동작은 변경하지 않으면서 내부 구조를 개선하는 것. 쉽게 이해하고 수정하여 빠르게 개발하기 위함",a:"리팩토링(Refactoring)"},
+    {q:"시스템이 무엇(What)을 하는지, 사용자가 원하는 동작에 관한 요구사항",a:"기능 요구사항"},
+    {q:"어떻게(How) 동작해야 하는지. 장비 구성, 성능, 보안 등 품질 제약사항",a:"비기능 요구사항"},
+    {q:"LOC 기법에서 개발 기간 계산식\n(총 라인 수 30,000 / 월간 생산성 300 / 투입 인원 5)",a:"노력(인월) / 투입인원\n= (LOC/생산성)/인원\n= (30000/300)/5 = 20개월"},
+    {q:"럼바우(Rumbaugh) 모델링 3가지\n① DFD(자료흐름도) 사용\n② STD(상태변화도) 사용\n③ ERD 사용\n★ 객/동/기 로 암기",a:"① 기능(Function) 모델링\n② 동적(Dynamic) 모델링\n③ 정보(Information/객체) 모델링"},
+    {q:"모듈 간 결합도↓ 응집도↑ 가 목표인 소프트웨어 배포 작업",a:"소프트웨어 패키징\n결합도(Coupling) 최소화\n응집도(Cohesion) 최대화"},
+    {q:"릴리즈 노트 작성 시 릴리즈 노트 이름, 소프트웨어 이름, 버전, 날짜 등이 포함된 항목",a:"머릿말(Header)"},
+    {q:"소프트웨어 개발 과정에서 만들어지는 프로그램, 문서, 데이터 등을 관리하는 것. Git, SVN 등",a:"형상관리(SCM)"},
+    {q:"형상 관리 도구 3가지를 고르시오\n(OLAP, CVS, Ant, Maven, Git, Jenkins, SVN, Spring)",a:"CVS, Git, SVN"},
+    {q:"식별된 형상 항목에 대한 변경 요구를 검토하여 현재의 기준선(Baseline)이 잘 반영되도록 조정",a:"형상 통제"},
+  ]},
+  { name:"UML / 설계", icon:"📐", color:"#7c3aed", cards:[
+    {q:"UML 다이어그램 중 객체(Object)들을 추상화하여 표현. 이름, 속성, 메소드 3개 구획",a:"클래스(Class) 다이어그램"},
+    {q:"UML 구성요소 3가지\n사물, ( ① ), 다이어그램\n( ② ) = 속성과 동작, 직사각형\n( ③ ) = 동작 모아놓은 것, 단독 사용 불가",a:"① 관계(Relationship)\n② 클래스(Class)\n③ 인터페이스(Interface)"},
+    {q:"UML 관계 영어 6가지\nAssociation / Aggregation / Composition\nGeneralization / Dependency / Realization",a:"연관 / 집합 / 포함(합성)\n일반화 / 의존 / 실체화"},
+    {q:"UML 관계\n① 전체-부분, 서로 독립적\n② 상위=일반적, 하위=구체적",a:"① Aggregation(집합)\n② Generalization(일반화)"},
+    {q:"패키지 간 의존 관계를 표현.\n<<import>> 스테레오타입 사용",a:"패키지 다이어그램\n(Package Diagram)"},
+    {q:"UML 다이어그램 2대 분류\n구조적(정적) vs 행위적(동적)\n구조적 5가지를 말하시오",a:"클래스 / 패키지 / 객체\n컴포넌트 / 배치"},
+    {q:"UML 행위적(동적) 다이어그램 5가지",a:"유스케이스(사용자 관점)\n시퀀스(시간 흐름 위→아래)\n활동(순서도/알고리즘)\n상태(이벤트에 의한 상태 변화)\n통신(객체 간 관계 구조)"},
+    {q:"사용자 관점에서 액터와 기능이 등장하는 다이어그램",a:"유스케이스 다이어그램"},
+    {q:"시간의 흐름에 따라 위에서 아래로 메시지 교환을 그리는 다이어그램",a:"시퀀스(순차) 다이어그램"},
+  ]},
+  { name:"디자인 패턴", icon:"🧩", color:"#7c3aed", cards:[
+    {q:"GOF 디자인 패턴 3대 분류",a:"생성 - 객체를 어떻게 만들 것인가\n구조 - 어떻게 조합하여 더 큰 구조로\n행위 - 상호작용 방법, 책임 분배"},
+    {q:"생성 패턴: 객체 생성을 서브 클래스에서 처리.\n가상 생성자(Virtual Constructor)",a:"Factory Method 패턴"},
+    {q:"생성 패턴: 객체를 메모리에 딱 하나만 생성",a:"Singleton(싱글톤) 패턴"},
+    {q:"생성 패턴: 복잡한 객체를 단계별로 조립해서 생성",a:"Builder(빌더) 패턴"},
+    {q:"생성 패턴: 기존 객체를 복제해서 생성",a:"Prototype(프로토타입) 패턴"},
+    {q:"생성 패턴: 연관된 부품을 그룹(군)으로 묶어서 생성",a:"Abstract Factory 패턴"},
+    {q:"구조 패턴: 구현부에서 추상층을 분리.\n기능과 구현을 두 개의 별도 클래스로.\n'독립적으로 확장' 키워드",a:"Bridge 패턴"},
+    {q:"구조 패턴: 호환되지 않는 인터페이스를 맞춰주는 변환기(돼지코)",a:"Adapter 패턴"},
+    {q:"구조 패턴: 복잡한 하위 시스템을 가려주는 통합 인터페이스(큰 정문)",a:"Facade 패턴"},
+    {q:"구조 패턴: 실제 객체 대신 일을 처리하는 대리자",a:"Proxy 패턴"},
+    {q:"행위 패턴: 한 객체의 상태가 변화하면 다른 객체들에게 전달.\n일대다, Pub/Sub 키워드",a:"Observer 패턴"},
+    {q:"행위 패턴: 상위 클래스에서 뼈대(흐름)를 잡고, 하위 클래스에서 세부 구현",a:"Template Method 패턴"},
+    {q:"행위 패턴: 알고리즘을 통째로 캡슐화해서 런타임에 교체",a:"Strategy 패턴"},
+    {q:"Interpreter, Observer, Command 등은 어떤 분류의 패턴?",a:"행위(Behavioral) 패턴\n클래스나 객체들이 상호작용하는\n방법이나 책임 분배 방법 정의"},
+    {q:"SOLID 원칙 5가지 약자 풀이",a:"S - 단일책임(SRP)\nO - 개방폐쇄(OCP)\nL - 리스코프 치환(LSP)\nI - 인터페이스 분리(ISP)\nD - 의존성 역전(DIP)"},
+  ]},
+  { name:"결합도 / 응집도", icon:"🔗", color:"#dc2626", cards:[
+    {q:"결합도 6단계 순서 (강→약)\n★ 내공외제스자 로 암기",a:"내용(Content) → 공통(Common)\n→ 외부(External) → 제어(Control)\n→ 스탬프(Stamp) → 자료(Data)\n※ 자료 결합도가 가장 좋음"},
+    {q:"결합도: 남의 내부 변수를 직접 참조하거나 수정",a:"내용 결합도(Content)"},
+    {q:"결합도: 전역 변수 같이 쓰기",a:"공통 결합도(Common)"},
+    {q:"결합도: 어떻게 처리할지 결정하는 제어 요소(flag)를 전달",a:"제어 결합도(Control)"},
+    {q:"결합도: 배열이나 레코드(객체 구조) 자체를 넘김",a:"스탬프 결합도(Stamp)"},
+    {q:"결합도: 필요한 파라미터(값)만 주고받음",a:"자료 결합도(Data) ← 가장 좋음"},
+    {q:"응집도 7단계 순서 (약→강)\n★ 우논시절통순기 로 암기",a:"우연적 → 논리적 → 시간적\n→ 절차적 → 통신적(교환적)\n→ 순차적 → 기능적\n※ 기능적 응집도가 가장 좋음"},
+    {q:"응집도: 내부 요소들이 기능적 연관성 없으나 순차적으로 실행",a:"절차적 응집도(Procedural)"},
+    {q:"응집도: 서로 다른 기능이지만 동일한 입력과 출력을 사용",a:"교환적/통신적 응집도(Communication)"},
+    {q:"응집도: 하나의 기능에 밀접하게 관련",a:"기능적 응집도(Functional) ← 가장 좋음"},
+    {q:"팬인(Fan-In) vs 팬아웃(Fan-Out)",a:"팬인: 자신을 호출하는 모듈 수 (위에서 꽂히는 수)\n팬아웃: 자신이 호출하는 모듈 수 (아래로 꽂는 수)\n※ 팬인↑ 팬아웃↓ = 좋은 설계"},
+  ]},
+  { name:"DB 기초 / 설계", icon:"🗄️", color:"#059669", cards:[
+    {q:"데이터베이스의 구조와 제약 조건에 관한 전반적인 명세를 기술한 것",a:"스키마(Schema)"},
+    {q:"DB 설계 5단계\n★ 요개논물구 로 암기",a:"요구 분석 → 개념적 설계\n→ 논리적 설계 → 물리적 설계\n→ 구현"},
+    {q:"E-R 다이어그램으로 요구조건을 만들고, 사람 머리로 이해하는 단계",a:"개념적 설계"},
+    {q:"DBMS의 자료 구조로 변환. 정규화 수행",a:"논리적 설계"},
+    {q:"실제 저장 장치에 어떻게 저장할지 결정",a:"물리적 설계"},
+    {q:"데이터 모델 3요소",a:"구조(Structure) - 데이터 구성\n연산(Operation) - 작업 명세\n제약 조건(Constraint) - 논리 규칙"},
+    {q:"튜플(행)의 수 = ?\n속성(열)의 수 = ?",a:"행의 수 = 카디널리티(Cardinality)\n열의 수 = 디그리(Degree)"},
+    {q:"E-R 다이어그램 기호 4가지",a:"직사각형 = 개체 집합\n마름모 = 관계 집합\n타원 = 속성\n선 = 연결"},
+  ]},
+  { name:"키 / 정규화 / 이상", icon:"🔑", color:"#d97706", cards:[
+    {q:"슈퍼키 vs 후보키 vs 기본키 vs 대체키",a:"슈퍼키: 유일성\n후보키: 유일성 + 최소성\n기본키: 후보키 중 관리자가 선택한 메인 키\n대체키: 기본키가 아닌 후보키"},
+    {q:"이상(Anomaly) 3가지\n★ 삽/삭/갱 으로 암기",a:"삽입 이상: 불필요한 값까지 억지로 넣어야 함\n삭제 이상: 의도하지 않은 값까지 삭제\n갱신 이상: 일부만 수정되어 모순 발생"},
+    {q:"함수적 종속 3가지\n① 기본키 전체에 종속\n② 기본키 일부만으로 식별\n③ A→B, B→C일 때 A→C",a:"① Full(완전 함수적 종속)\n② Partial(부분 함수적 종속)\n③ Transitive(이행적 함수적 종속)"},
+    {q:"정규화 순서\n★ 도부이결다조 로 암기",a:"1NF: 도메인이 원자값\n2NF: 부분 함수 종속 제거\n3NF: 이행적 함수 종속 제거\nBCNF: 결정자이며 후보키 아닌 것 제거\n4NF: 다중치 종속 제거\n5NF: 조인 종속성 이용"},
+    {q:"부분 함수적 종속을 제거하여 만드는 정규형",a:"제2정규형(2NF)"},
+    {q:"정규화된 데이터 모델을 의도적으로 통합, 중복, 분리하여 정규화 원칙을 위배하는 행위",a:"반정규화(Denormalization)\n= 비정규화"},
+  ]},
+  { name:"SQL / 관계대수", icon:"📊", color:"#0891b2", cards:[
+    {q:"관계대수 기호 6가지\n합집합/차집합/교차곱/프로젝트/조인/디비전",a:"∪ / — / × / π / ⋈ / ÷"},
+    {q:"관계대수: 릴레이션 B의 조건에 맞는 것만 A에서 분리 후 프로젝션",a:"÷ (디비전)"},
+    {q:"비절차적(WHAT) 방법으로 관계 데이터 연산을 표현. 코드(E.F.Codd)가 제안",a:"관계해석(Relational Calculus)\n※ 관계대수는 절차적(HOW)"},
+    {q:"SQL 분류 3가지\nDDL / DML / DCL",a:"DDL: CREATE, ALTER, DROP, TRUNCATE\nDML: SELECT, INSERT, UPDATE, DELETE\nDCL: GRANT, REVOKE\n(COMMIT, ROLLBACK은 TCL에도 해당)"},
+    {q:"DCL: 사용자에게 권한 부여 / 권한 회수",a:"GRANT(부여) / REVOKE(회수)"},
+    {q:"DCL: 트랜잭션 실패 시 작업 취소하고 이전 상태로 되돌리기",a:"ROLLBACK"},
+  ]},
+  { name:"트랜잭션 / 회복", icon:"🔄", color:"#4f46e5", cards:[
+    {q:"트랜잭션의 4가지 특성 (ACID)",a:"원자성(Atomicity) - All or Nothing\n일관성(Consistency) - 일관된 상태 유지\n독립성(Isolation) - 병행 시 끼어들기 불가\n지속성(Durability) - 영구 반영"},
+    {q:"REDO vs UNDO",a:"REDO: start+commit 있음 → 재작업\n(이전값→이후값)\nUNDO: start만 있고 commit 없음 → 취소\n(이후값→이전값)"},
+    {q:"트랜잭션 완료 전에도 즉시 DB에 반영.\nRedo와 Undo 모두 수행 가능",a:"즉각 갱신 기법\n(Immediate Update)"},
+    {q:"데이터에 대한 연산을 마칠 때까지 추가 접근을 제한. 상호 배타적",a:"로킹(Locking)"},
+    {q:"<값, 주소> 쌍으로 구성되어 데이터에 빠르게 접근하는 파일 구조",a:"색인(Index)"},
+    {q:"비상사태 시점부터 업무가 복구되어 정상 가동될 때까지의 시간",a:"RTO(목표복구시간)"},
+    {q:"데이터 소유자가 사용자 신원에 따라 접근 권한을 임의로 부여하는 방식",a:"DAC(임의 접근통제)"},
+  ]},
+  { name:"인터페이스 / 연계", icon:"🔌", color:"#be185d", cards:[
+    {q:"HTML 호환 문제와 SGML 복잡함 해결. 유니코드 지원, 파서 내장",a:"XML"},
+    {q:"XML 메시지를 네트워크 상에서 교환하는 통신 프로토콜. envelope, 헤더, 바디 구성",a:"SOAP"},
+    {q:"웹 서비스 설명서(메뉴판). XML로 작성. UDDI의 기초",a:"WSDL"},
+    {q:"속성-값 쌍으로 데이터 전달. {\"name\":\"홍길동\"} 형태. AJAX에서 XML 대체",a:"JSON"},
+    {q:"비동기 방식으로 페이지 일부 영역만 업데이트하는 기술",a:"AJAX"},
+    {q:"EAI 구축 유형 4가지",a:"Point-to-Point: 1:1 직접 연결\nHub & Spoke: 허브 중앙 집중형\nMessage Bus: 미들웨어 통신\nHybrid: 내부 H&S + 외부 Bus"},
+    {q:"모듈 간 통신용 프로그래밍 인터페이스 집합\n공유메모리, 소켓, 세마포어, 파이프, 메시지 큐",a:"IPC\n(Inter-Process Communication)"},
+  ]},
+  { name:"UI / UX", icon:"🖥️", color:"#9333ea", cards:[
+    {q:"자연스러운 움직임으로 상호작용. 시리, 빅스비, 터치",a:"NUI (Natural UI)"},
+    {q:"마우스로 아이콘이나 메뉴를 선택하여 작업 수행",a:"GUI (그래픽 사용자 인터페이스)"},
+    {q:"UI 설계 4대 원칙\n★ 직/유/학/유 로 암기",a:"직관성 - 쉽게 이해·사용\n유효성 - 목적을 정확히 달성\n학습성 - 쉽게 배우고 익힘\n유연성 - 요구사항 수용, 실수 최소화"},
+    {q:"① 시스템 이용하면서 느끼는 총체적인 감정 및 경험\n② 사용자와 시스템 간 상호작용을 도와주는 장치/소프트웨어",a:"① UX (사용자 경험)\n② UI (사용자 인터페이스)"},
+  ]},
+  { name:"테스트 원리 / 기법", icon:"✅", color:"#16a34a", cards:[
+    {q:"동일한 테스트 케이스로 반복하면 더 이상 결함이 발견되지 않는 현상",a:"살충제 패러독스\n(Pesticide Paradox)"},
+    {q:"애플리케이션을 실행하지 않고 소스 코드 자체를 검사",a:"정적 분석(정적 테스트)\n※ 실행하면 동적 테스트"},
+    {q:"화이트박스 커버리지 3가지\n① 모든 문장 최소 한번 수행\n② 조건식이 참/거짓일 때 수행\n③ 개별 조건이 참/거짓일 때 수행",a:"① 구문(Statement) 커버리지\n② 결정/분기(Branch) 커버리지\n③ 조건(Condition) 커버리지"},
+    {q:"블랙박스 테스트 기법 5가지\n★ 동/경/원/오/비 로 암기",a:"동치 분할 / 경계값 분석\n원인-효과 그래프\n오류 예측 / 비교 검사"},
+    {q:"화이트박스 테스트 기법\n★ 기/루/데/조/분 로 암기",a:"기초 경로 / 루프\n데이터 흐름 / 조건·분기 커버리지"},
+    {q:"영역 경계에 해당하는 입력값(-1,0,69,70,79,80…)을 넣고 비교",a:"경계값 분석\n(Boundary Value Analysis)"},
+    {q:"각 영역의 대표 입력값(60,75,82,96) 하나만 넣어서 비교",a:"동치 분할 검사\n(Equivalence Partitioning)"},
+    {q:"그래프로 입력 데이터 간의 관계와 출력 영향을 체계적으로 분석",a:"원인-효과 그래프\n(Cause-Effect Graph)"},
+    {q:"소프트웨어가 수행할 특정 기능이 완전히 작동되는 것을 입증. 내부 구조 무관",a:"블랙박스 테스트"},
+  ]},
+  { name:"테스트 단계 / 통합", icon:"🧪", color:"#ea580c", cards:[
+    {q:"V-모델 테스트 4단계\n★ 단/통/시/인 으로 암기",a:"① 단위(Unit) - 모듈 확인\n② 통합(Integration) - 인터페이스 확인\n③ 시스템(System) - 기능 확인\n④ 인수(Acceptance) - 요구사항 확인"},
+    {q:"인수 테스트\n① 통제된 환경, 개발자 앞에서\n② 개발자 없이, 사용자 환경에서",a:"① 알파 테스트\n② 베타 테스트"},
+    {q:"하향식 통합 → 미완성 하위 모듈 대체\n상향식 통합 → 미완성 상위 모듈 대체\n★ 하스 상드",a:"하향식 → 스텁(Stub)\n상향식 → 드라이버(Driver)"},
+    {q:"코드 수정 후 예전 테스트를 다시 돌려보는 꼼꼼이 테스트",a:"회귀 테스트(Regression)"},
+    {q:"테스트 케이스 구성 요소 3가지",a:"테스트 조건\n테스트 데이터\n예상 결과"},
+    {q:"테스트 오라클 4형제\n★ 참/샘/휴/일 로 암기",a:"참 오라클: 모든 입력에 대해 결과 제공(항공/은행)\n샘플링: 특정 몇몇 케이스만\n휴리스틱: 직관과 경험으로 추정\n일관성 검사: 수정 전/후 비교(회귀테스트 단짝)"},
+    {q:"소스 코드 품질 분석\n① 실행하지 않고 확인\n② 실행하여 추적·보고",a:"① 정적 분석(Static Analysis)\n② 동적 분석(Dynamic Analysis)"},
+    {q:"자바 유닛 테스트 프레임워크. xUnit 계열. Kent Beck & Erich Gamma",a:"JUnit"},
+  ]},
+  { name:"성능 측정", icon:"📈", color:"#0d9488", cards:[
+    {q:"애플리케이션 성능 지표 4가지",a:"처리량(Throughput) - 일정 시간 내 처리량\n응답 시간(Response Time) - 요청~응답 도착\n경과 시간(Turn Around Time) - 의뢰~처리 완료\n자원 활용률 - CPU, 메모리 사용률"},
+  ]},
+  { name:"보안 기초 / 암호화", icon:"🔒", color:"#b91c1c", cards:[
+    {q:"보안 3대 요소\n★ 기/무/가 로 암기",a:"기밀성 - 인가된 사람만 열람(암호화)\n무결성 - 인가된 사람만 수정(해시)\n가용성 - 언제나 사용 가능(서버 이중화)"},
+    {q:"웹 응용 프로그램에 SQL 구문을 삽입하여 DB 데이터 유출·변조, 인증 우회",a:"SQL Injection"},
+    {q:"IP 계층에서 패킷 단위의 데이터 변조 방지 및 은닉 제공. 네트워크 보안 통신 규약",a:"IPSec"},
+    {q:"대칭키 암호화 알고리즘 정리\n1974 IBM, 블록64/키56, 16라운드, 구식",a:"DES"},
+    {q:"2001 NIST, 블록128, 키 128/192/256, DES 대체",a:"AES"},
+    {q:"스위스 Lai&Messey, 128비트 키, PES→IPES→현재",a:"IDEA"},
+    {q:"NSA 개발, 클리퍼 칩, 80비트 키, 음성 데이터 암호화",a:"Skipjack"},
+    {q:"1991 Rivest, MD4 개선, 512비트 입력→128비트 state, 일방향 해시",a:"MD5"},
+    {q:"무선랜 WEP 보안 보완. 임시 키 무결성 프로토콜. 128비트 키, 패킷당 키 할당",a:"TKIP"},
+    {q:"비대칭키(공개키) 암호화. 큰 숫자의 소인수분해 어려움 이용. HTTPS/SSL의 근본",a:"RSA\n(Rivest-Shamir-Adleman)"},
+    {q:"MD5 보안 취약점 극복을 위해 NSA에서 만든 해시 알고리즘. SHA-256, SHA-512",a:"SHA\n(Secure Hash Algorithm)"},
+    {q:"1999 KISA(한국인터넷진흥원) 개발. 국내 공공기관 표준 블록 암호",a:"SEED"},
+    {q:"국정원과 산학연 협회 개발. 경량 환경/하드웨어에서 효율적. 국가 표준",a:"ARIA"},
+  ]},
+  { name:"보안 공격 / 위협", icon:"⚠️", color:"#c2410c", cards:[
+    {q:"LAN에서 ARP 프로토콜의 취약점 이용. MAC 주소를 변조하여 패킷 가로채기",a:"ARP 스푸핑"},
+    {q:"패킷의 출발지와 목적지 IP/포트를 동일하게 → 자신에 대해 무한 응답 → DoS",a:"LAND Attack"},
+    {q:"사람을 속여 정상 보안 절차를 깨트리는 비기술적 침입 수단. 보이스피싱 등",a:"사회 공학(Social Engineering)"},
+    {q:"RST 패킷으로 정상 연결 종료 후 공격자에게 연결. TCP 3-Way-Handshake 끼어듦",a:"세션 하이재킹(Session Hijacking)"},
+    {q:"목표 조직이 자주 방문하는 웹사이트를 사전에 감염",a:"Watering Hole"},
+    {q:"네트워크 중간에서 패킷 정보를 도청. 수동적 공격",a:"스니핑(Sniffing)\n※ 위조·변조·속이기는 스푸핑(Spoofing)"},
+    {q:"유명 도메인의 오타를 노려 유사한 도메인을 미리 등록. URL 하이재킹",a:"타이포스쿼팅(Typosquatting)"},
+    {q:"ARM 개발. 프로세서를 일반 구역(Normal)과 보안 구역(Secure)으로 분할",a:"Trustzone"},
+    {q:"수집 후 활용되지 않고 저장만 되어 보안 위험을 초래하는 대량의 데이터",a:"다크 데이터(Dark Data)"},
+  ]},
+  { name:"보안 솔루션", icon:"🛡️", color:"#7e22ce", cards:[
+    {q:"AAA 서버 3가지 기능",a:"Authentication(인증) - 신원 확인\nAuthorization(인가) - 권한 부여\nAccounting(과금) - 사용 기록"},
+    {q:"공중 네트워크를 마치 전용 회선처럼 사용. SSL/IPSec 터널링",a:"VPN (Virtual Private Network)"},
+    {q:"방화벽, IDS, IPS, VPN 등의 로그와 보안 이벤트를 통합 관리",a:"SIEM"},
+    {q:"보안 장비 3대장\n① 출입국 관리소 역할\n② CCTV 역할(경고만)\n③ 경호원 역할(직접 차단)",a:"① 방화벽(Firewall)\n② IDS(침입 탐지 시스템)\n③ IPS(침입 방지 시스템)"},
+    {q:"KISA에서 운영. 정보보호 정책 수립, 보안 대책 통합 관리",a:"ISMS"},
+  ]},
+  { name:"OS / 프로세스", icon:"💻", color:"#1d4ed8", cards:[
+    {q:"1960년대 AT&T 벨 연구소+MIT+GE. C언어 작성. 시분할 시스템. 트리 구조 파일",a:"UNIX"},
+    {q:"리눅스 커널 위에서 동작. 자바와 코틀린으로 앱 작성. 휴대용 장치",a:"안드로이드(Android)"},
+    {q:"OS의 심장. 하드웨어를 보호하고 프로세스, 메모리 관리를 수행하는 핵심 로직",a:"커널(Kernel)"},
+    {q:"사용자와 시스템 사이의 인터페이스(껍데기). 사용자의 명령어를 인식하여 프로그램 호출",a:"쉘(Shell)\n※ 명령어 해석기 = 쉘"},
+    {q:"프로세스 상태 3가지와 전이\n디스패치: 준비→실행\n할당시간 초과: 실행→준비",a:"① 준비(Ready) - CPU 대기\n② 실행(Run) - 실행 중\n③ 대기(Wait) - I/O 대기"},
+    {q:"비선점형 스케줄링 3가지\nFCFS / SJF / HRN",a:"FCFS: 먼저 오면 먼저 처리(선입선출)\nSJF: 실행시간 가장 짧은 것 먼저(기아 발생)\nHRN: (대기+서비스)/서비스 로 우선순위 계산"},
+    {q:"HRN 우선순위 계산 공식",a:"(대기 시간 + 서비스 시간)\n÷ 서비스 시간\n※ 값이 클수록 우선순위 높음"},
+    {q:"선점형 스케줄링 2가지\nRR / SRT",a:"RR: 시간 할당량만큼 쓰고 넘기기(평등)\nSRT: 남은 실행시간 가장 짧은 것에 CPU 뺏어줌"},
+    {q:"리눅스: 사용자 rwx, 그룹 r-x, 기타 --x\n→ 8진법으로 변환",a:"chmod 751 a.txt\nr=4, w=2, x=1\nrwx=7, r-x=5, --x=1"},
+  ]},
+  { name:"프로그래밍 개념", icon:"💡", color:"#ca8a04", cards:[
+    {q:"변수명에 자료형을 의미하는 문자를 포함.\nintNum, strName 등",a:"헝가리안 표기법(Hungarian)"},
+    {q:"명명 규칙 4가지\nmyValName / MyValName / my_val_name",a:"카멜(camelCase): 첫 글자 소문자\n파스칼(PascalCase): 모든 단어 대문자\n스네이크(snake_case): _로 연결\n헝가리안: 자료형 접두어"},
+    {q:"C++/Java에서 객체 생성 시 호출되어 초기화를 수행하는 메소드",a:"생성자(Constructor)"},
+    {q:"객체가 메모리에서 사라질 때 호출되어 메모리를 정리하는 메소드",a:"소멸자(Destructor)"},
+    {q:"이름은 같지만 매개변수의 개수나 타입이 다른 메소드를 여러 개 만드는 기법",a:"오버로딩(Overloading)"},
+    {q:"Python 리스트\n① 요소들을 추가하여 확장\n② 마지막 요소 삭제 후 반환\n③ 순서를 역순으로",a:"① extend()\n② pop()\n③ reverse()"},
+    {q:"Python append vs extend 차이\nlist.append([4,5])\nlist.extend([4,5])",a:"append: [1,2,3,[4,5]]\n→ 리스트 자체가 하나의 요소로 들어감\nextend: [1,2,3,4,5]\n→ 요소를 풀어서 기존 리스트에 연장"},
+  ]},
+  { name:"OSI 7계층", icon:"🌐", color:"#0369a1", cards:[
+    {q:"OSI 7계층 순서\n★ 물/데/네/전/세/표/응 으로 암기",a:"1. 물리(Physical)\n2. 데이터 링크(Data Link)\n3. 네트워크(Network)\n4. 전송(Transport)\n5. 세션(Session)\n6. 표현(Presentation)\n7. 응용(Application)"},
+    {q:"비트 스트림 전송. 기계적, 전기적, 기능적, 절차적 특성.\n케이블, 리피터, 허브",a:"1계층: 물리 계층"},
+    {q:"인접 시스템 간 신뢰성 있는 정보 전송. 오류 제어.\nMAC 주소, 브릿지, 스위치",a:"2계층: 데이터 링크 계층"},
+    {q:"경로 제어(라우팅), 패킷 교환.\nIP 주소, 라우터",a:"3계층: 네트워크 계층"},
+    {q:"양 끝단(End-to-End) 데이터 신뢰성 전달.\nTCP, UDP, 포트 번호",a:"4계층: 전송 계층"},
+    {q:"통신 관리 방법 제공.\n동기화 점, 세션 관리",a:"5계층: 세션 계층"},
+    {q:"코드 변환, 데이터 암호화·압축.\nJPEG, MPEG",a:"6계층: 표현 계층"},
+    {q:"UI 제공, 실질 서비스 제공.\nHTTP, FTP, SMTP, 웹 브라우저",a:"7계층: 응용 계층"},
+  ]},
+  { name:"네트워크 / 프로토콜", icon:"🔀", color:"#65a30d", cards:[
+    {q:"IPv4 vs IPv6 비트 수",a:"IPv4: 8비트×4부분 = 32비트\nIPv6: 16비트×8부분 = 128비트\n※ IPv6는 16진수·콜론(:) 구분"},
+    {q:"프로토콜 3요소\n★ 구/의/시 로 암기",a:"구문(Syntax) - 데이터 형식·구성\n의미(Semantics) - 오류·동기 제어\n시간(Timing) - 속도 조절·순서 관리"},
+    {q:"WWW에서 HTML 문서 송수신. GET과 POST 메소드",a:"HTTP"},
+    {q:"MAC 주소 → IP 주소를 찾는 역순 주소 결정 프로토콜",a:"RARP"},
+    {q:"IP와 조합하여 통신 중 오류 처리와 전송 경로 변경 등 제어 메시지 취급. Ping 명령어 사용",a:"ICMP"},
+    {q:"연결형: 전송 경로를 미리 연결하여 논리적으로 고정\n비연결형: 헤더에 경로 정보를 붙여 개별 전달",a:"가상 회선(Virtual Circuit)\n데이터그램(Datagram)"},
+    {q:"경로 제어 프로토콜 4가지\n① 자율 시스템 내부 라우팅\n② 자율 시스템 간 라우팅\n③ 링크 상태 실시간, 최단 경로\n④ ②의 단점 보완, 변화분만 교환",a:"① IGP ② EGP\n③ OSPF ④ BGP"},
+    {q:"한 번의 로그인으로 모든 사이트 이용",a:"SSO (Single Sign On)"},
+    {q:"1개의 정식 IP에 다량의 가상 사설 IP를 할당. 네트워크 주소 변환",a:"NAT (Network Address Translation)"},
+    {q:"재난·군사 현장에서 모바일 호스트만으로 구성. 멀티 홉 라우팅",a:"애드 혹 네트워크(Ad-hoc)"},
+  ]},
+  { name:"서브네팅", icon:"🧮", color:"#0d9488", cards:[
+    {q:"192.168.1.0/24를 FLSM으로 3개 Subnet 분할 시\n두 번째 네트워크의 브로드캐스트 IP",a:"192.168.1.127\n(블록: 0-63, 64-127, 128-191, 192-255)\n※ 2비트→4개 네트워크, 각 64개 호스트"},
+    {q:"서브네팅: IP 192.168.1.132\n서브넷 마스크 255.255.255.192\n네트워크 주소? 사용 가능 호스트?",a:"256-192=64 (블록 크기)\n네트워크: 0,64,128,192\n132는 128~191 구간\n→ 네트워크 주소: 192.168.1.128\n→ 호스트: 64-2=62개"},
+  ]},
+  { name:"신기술 / 기타", icon:"🚀", color:"#6d28d9", cards:[
+    {q:"대량의 데이터를 분석하여 변수 사이의 상호관계를 규명, 일정한 패턴을 찾아내는 기법",a:"데이터 마이닝(Data Mining)"},
+    {q:"오픈 소스 분산 컴퓨팅 플랫폼. 구글 맵리듀스 엔진 사용",a:"하둡(Hadoop)"},
+    {q:"URI로 웹상 데이터를 식별하고 링크 정보를 부여. Linked Data + Open Data",a:"LOD (개방형 링크드 데이터)"},
+    {q:"RAID Level 0: 패리티 없는 스트라이핑. 하나만 손상돼도 전체 유실",a:"RAID Level 0"},
+    {q:"P2P 네트워크로 금융 거래 정보를 참여자의 장비에 분산 저장",a:"블록체인(Blockchain)"},
+  ]},
+];
+
+// Build flat list
+const allCards = [];
+CATEGORIES.forEach((cat, ci) => {
+  cat.cards.forEach(card => {
+    allCards.push({ q: card.q, a: card.a, cat: cat.name, icon: cat.icon, color: cat.color, ci: ci });
+  });
+});
+const TOTAL = allCards.length;
+
+// ===== STATE =====
+let known = new Set();
+let currentCards = [];
+let cardIndex = 0;
+let flipped = false;
+let currentMode = 'home';
+
+function loadKnown() {
+  try {
+    const d = localStorage.getItem('eip_known');
+    if (d) known = new Set(JSON.parse(d));
+  } catch(e) {}
+}
+function saveKnown() {
+  try { localStorage.setItem('eip_known', JSON.stringify([...known])); } catch(e) {}
+}
+loadKnown();
+
+// ===== HOME =====
+function renderHome() {
+  document.getElementById('homePage').classList.add('active');
+  document.getElementById('cardPage').classList.remove('active');
+  document.getElementById('donePage').classList.remove('active');
+  currentMode = 'home';
+
+  const p = known.size;
+  document.getElementById('homeProgress').textContent = p + '/' + TOTAL;
+  document.getElementById('homeProgressBar').style.width = (p / TOTAL * 100) + '%';
+
+  const weakCount = TOTAL - p;
+  const btnWeak = document.getElementById('btnWeak');
+  btnWeak.textContent = '🔥 아직 모르는 문제만 (' + weakCount + '개)';
+  btnWeak.style.display = weakCount > 0 ? 'block' : 'none';
+
+  const list = document.getElementById('catList');
+  list.innerHTML = '';
+  CATEGORIES.forEach((cat, idx) => {
+    const catKnown = cat.cards.filter(c => {
+      const gi = allCards.findIndex(ac => ac.q === c.q);
+      return known.has(gi);
+    }).length;
+    const total = cat.cards.length;
+    const done = catKnown === total;
+    const pct = Math.round(catKnown / total * 100);
+
+    const btn = document.createElement('button');
+    btn.className = 'cat-btn';
+    btn.onclick = () => startCategory(idx);
+    btn.innerHTML = `
+      <div class="cat-icon" style="background:${cat.color}22">${cat.icon}</div>
+      <div class="cat-info">
+        <div class="cat-name">${cat.name}</div>
+        <div class="cat-meta">${total}문제 · ${catKnown}개 완료</div>
+      </div>
+      <div class="cat-badge" style="background:${done ? cat.color+'33' : 'rgba(255,255,255,0.05)'};color:${done ? cat.color : '#64748b'}">
+        ${done ? '✓' : pct+'%'}
+      </div>
+    `;
+    list.appendChild(btn);
+  });
+}
+
+// ===== CARD VIEW =====
+function showCardPage() {
+  document.getElementById('homePage').classList.remove('active');
+  document.getElementById('donePage').classList.remove('active');
+  document.getElementById('cardPage').classList.add('active');
+}
+
+function renderCard() {
+  if (currentCards.length === 0) {
+    document.getElementById('cardPage').classList.remove('active');
+    document.getElementById('donePage').classList.add('active');
+    return;
+  }
+  showCardPage();
+  const card = currentCards[cardIndex];
+  const gi = card.globalIndex !== undefined ? card.globalIndex : allCards.findIndex(ac => ac.q === card.q);
+
+  document.getElementById('cardCat').textContent = card.icon + ' ' + card.cat;
+  document.getElementById('cardCount').textContent = (cardIndex+1) + '/' + currentCards.length;
+  document.getElementById('cardProgressBar').style.width = ((cardIndex+1)/currentCards.length*100) + '%';
+  document.getElementById('cardProgressBar').style.background = card.color;
+  document.getElementById('qBox').style.borderLeftColor = card.color;
+  document.getElementById('qText').textContent = card.q;
+
+  const aBox = document.getElementById('aBox');
+  const aHint = document.getElementById('aHint');
+  const aCont = document.getElementById('aContent');
+  const aTextEl = document.getElementById('aText');
+  const btnK = document.getElementById('btnKnown');
+  const btnFlip = document.getElementById('btnFlip');
+
+  if (flipped) {
+    aBox.className = 'a-box shown';
+    aHint.style.display = 'none';
+    aCont.style.display = 'block';
+    aTextEl.textContent = card.a;
+    btnK.style.display = 'block';
+    btnFlip.textContent = '문제 보기';
+    btnFlip.style.background = card.color + '22';
+    btnFlip.style.color = card.color;
+  } else {
+    aBox.className = 'a-box hidden';
+    aHint.style.display = 'block';
+    aCont.style.display = 'none';
+    btnK.style.display = 'none';
+    btnFlip.textContent = '정답 보기';
+    btnFlip.style.background = card.color + '22';
+    btnFlip.style.color = card.color;
+  }
+
+  const isK = known.has(gi);
+  btnK.className = 'btn-known ' + (isK ? 'on' : 'off');
+  btnK.textContent = isK ? '✅ 암기 완료! (탭하여 해제)' : '⬜ 암기 완료로 체크하기';
+
+  const btnP = document.getElementById('btnPrev');
+  const btnN = document.getElementById('btnNext');
+  btnP.className = 'nav-btn nav-prev' + (cardIndex === 0 ? ' off' : '');
+  btnP.disabled = cardIndex === 0;
+  btnN.className = 'nav-btn nav-next' + (cardIndex === currentCards.length - 1 ? ' off' : '');
+  btnN.disabled = cardIndex === currentCards.length - 1;
+}
+
+// ===== ACTIONS =====
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function startAll(random) {
+  currentCards = allCards.map((c, i) => ({...c, globalIndex: i}));
+  if (random) currentCards = shuffle(currentCards);
+  cardIndex = 0; flipped = false;
+  renderCard();
+}
+
+function startCategory(idx) {
+  const cat = CATEGORIES[idx];
+  currentCards = cat.cards.map(c => {
+    const gi = allCards.findIndex(ac => ac.q === c.q);
+    return { q: c.q, a: c.a, cat: cat.name, icon: cat.icon, color: cat.color, globalIndex: gi };
+  });
+  cardIndex = 0; flipped = false;
+  renderCard();
+}
+
+function startWeak() {
+  currentCards = allCards.map((c, i) => ({...c, globalIndex: i})).filter(c => !known.has(c.globalIndex));
+  cardIndex = 0; flipped = false;
+  renderCard();
+}
+
+function goHome() {
+  renderHome();
+}
+
+function toggleFlip() {
+  flipped = !flipped;
+  renderCard();
+}
+
+function nextCard() {
+  if (cardIndex < currentCards.length - 1) {
+    cardIndex++; flipped = false; renderCard();
+  }
+}
+
+function prevCard() {
+  if (cardIndex > 0) {
+    cardIndex--; flipped = false; renderCard();
+  }
+}
+
+function toggleKnown() {
+  const card = currentCards[cardIndex];
+  const gi = card.globalIndex !== undefined ? card.globalIndex : allCards.findIndex(ac => ac.q === card.q);
+  if (known.has(gi)) known.delete(gi);
+  else known.add(gi);
+  saveKnown();
+  renderCard();
+}
+
+function showResetModal() { document.getElementById('resetModal').classList.add('active'); }
+function hideResetModal() { document.getElementById('resetModal').classList.remove('active'); }
+function doReset() {
+  known = new Set();
+  saveKnown();
+  hideResetModal();
+  renderHome();
+}
+
+// ===== SWIPE =====
+let touchStartX = null, touchStartY = null;
+document.addEventListener('touchstart', e => {
+  touchStartX = e.touches[0].clientX;
+  touchStartY = e.touches[0].clientY;
+}, { passive: true });
+document.addEventListener('touchend', e => {
+  if (!touchStartX || currentMode === 'home') return;
+  const dx = e.changedTouches[0].clientX - touchStartX;
+  const dy = e.changedTouches[0].clientY - touchStartY;
+  if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) {
+    if (dx < 0) nextCard(); else prevCard();
+  }
+  touchStartX = null;
+}, { passive: true });
+
+// ===== KEYBOARD =====
+document.addEventListener('keydown', e => {
+  if (currentMode === 'home') return;
+  if (e.key === 'ArrowLeft') prevCard();
+  else if (e.key === 'ArrowRight') nextCard();
+  else if (e.key === ' ') { e.preventDefault(); toggleFlip(); }
+});
+
+// ===== INIT =====
+renderHome();
+</script>
+</body>
+</html>
